@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="llLoginPadding">30dp</dimen>
-    <dimen name="tvMargin">24dp</dimen>
+    <dimen name="tvLoginMarginTop">30dp</dimen>
+    <dimen name="imgButtonLogin">40dp</dimen>
+    <dimen name="btLoginMarginLeftRight">60dp</dimen>
+    <dimen name="imgLoginSize">200dp</dimen>
+    <dimen name="imgBtLoginMargin">20dp</dimen>
+    <dimen name="btLoginMarginTop">10dp</dimen>
+
 </resources>

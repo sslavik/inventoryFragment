@@ -9,13 +9,21 @@
     android:padding="@dimen/llLoginPadding"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/imgLoginSize"
+        android:layout_height="@dimen/imgLoginSize"
+        android:layout_weight="0"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/inventory" />
+
     <TextView
         android:id="@+id/tvUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/tvUser"
-        android:layout_margin="@dimen/tvMargin"
+        android:layout_marginTop="@dimen/tvLoginMarginTop"
         tools:text="User" />
 
     <EditText
@@ -35,8 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:text="@string/tvPassword"
-        android:layout_margin="@dimen/tvMargin"
-
+        android:layout_marginTop="@dimen/tvLoginMarginTop"
         tools:text="Password" />
 
     <EditText
@@ -49,12 +56,14 @@
         android:inputType="textPassword" />
 
     <LinearLayout
+        android:layout_marginTop="@dimen/tvLoginMarginTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:orientation="horizontal">
 
         <CheckBox
+            style="@style/Widget.CheckBox"
             android:id="@+id/chRemember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,27 +75,83 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/hexagon"
+            android:layout_marginBottom="@dimen/btLoginMarginTop"
             android:text="@string/btSignUp" />
     </LinearLayout>
-
+    <!-- Se puede establecer el fondo trasparente con el atributo @android:color/transparent-->
     <Button
         android:id="@+id/btSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginTop="@dimen/btLoginMarginTop"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/btLoginMarginLeftRight"
+        android:layout_marginRight="@dimen/btLoginMarginLeftRight"
+        android:background="@drawable/rectangle_round"
         android:text="@string/btSignIn" />
 
-    <Button
-        android:id="@+id/btGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="@string/btGoogle" />
 
-    <Button
-        android:id="@+id/btFacebook"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="@string/btFacebook" />
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tvOtherSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tvLoginMarginTop"
+            android:text="@string/tvOther" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btGoogle"
+                android:layout_width="@dimen/imgButtonLogin"
+                android:layout_height="@dimen/imgButtonLogin"
+                android:layout_weight="0"
+                android:layout_margin="@dimen/imgBtLoginMargin"
+                android:background="@drawable/round"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:padding="9dp"
+                android:scaleType="centerInside"
+                android:text="@string/btGoogle"
+                android:src="@drawable/ic_google_brands" />
+
+            <ImageButton
+                android:id="@+id/btFacebook"
+                android:layout_width="@dimen/imgButtonLogin"
+                android:layout_height="@dimen/imgButtonLogin"
+                android:layout_weight="0"
+                android:layout_margin="@dimen/imgBtLoginMargin"
+                android:background="@drawable/round"
+                android:padding="9dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:src="@drawable/ic_facebook_f_brands"
+                android:scaleType="centerInside"
+                android:text="@string/btFacebook" />
+            <ImageButton
+                android:id="@+id/btTwitter"
+                android:layout_width="@dimen/imgButtonLogin"
+                android:layout_height="@dimen/imgButtonLogin"
+                android:layout_weight="0"
+                android:layout_margin="@dimen/imgBtLoginMargin"
+                android:background="@drawable/round"
+                android:padding="9dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:src="@drawable/ic_twitter_brands"
+                android:scaleType="centerInside"
+                android:text="@string/btFacebook" />
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </LinearLayout>

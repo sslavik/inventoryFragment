@@ -7,5 +7,28 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryTextColor</item>
     </style>
+    <style name="AppTheme.SpalshTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!--Vasmoa a crear una serie de estilos a través de la herencia-->
+    <style name="Widget" parent="@android:style/Widget">
 
+    </style>
+
+    <style name="Widget.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="Widget.Button.Transparent">
+        <item name="android:background">@null</item>
+    </style>
+
+    <!-- Estilos propios de componentes-->
+
+    <style name="Widget.CheckBox">
+        <item name="android:buttonTint">@color/primaryDarkColor</item>
+        <item name="android:checked">true</item>
+    </style>
 </resources>
