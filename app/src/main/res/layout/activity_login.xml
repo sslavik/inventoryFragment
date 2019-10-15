@@ -35,7 +35,7 @@
         android:hint="@string/edUser"
         android:inputType="textPersonName"
 
-        android:text="Name" />
+        />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/hexagon"
+            style="@style/Widget.Button.Transparent"
             android:layout_marginBottom="@dimen/btLoginMarginTop"
             android:text="@string/btSignUp" />
     </LinearLayout>
@@ -83,13 +83,13 @@
     <Button
         android:id="@+id/btSignIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:layout_marginTop="@dimen/btLoginMarginTop"
-        android:gravity="center"
+        android:layout_height="83dp"
         android:layout_marginLeft="@dimen/btLoginMarginLeftRight"
+        android:layout_marginTop="@dimen/btLoginMarginTop"
         android:layout_marginRight="@dimen/btLoginMarginLeftRight"
-        android:background="@drawable/rectangle_round"
+        android:layout_weight="0"
+        android:background="@drawable/list_shape"
+        android:gravity="center"
         android:text="@string/btSignIn" />
 
 

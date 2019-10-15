@@ -8,6 +8,8 @@ import android.os.Handler;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private static final long WAIT_TIME = 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,35 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 finish();
             }
-        }, 1000);
+        }, WAIT_TIME);
     }
+    /**
+     *  Este objeto Runnable ejecuta el código del método run fuera deñ hilo de la UI
+     *  Forma de Lourdes
+     */
+    /*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(WAIT_TIME);
+                    initLogin();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        runnable.run();
+    }
+
+    private void initLogin(){
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    */
 }
