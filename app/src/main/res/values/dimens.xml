@@ -4,8 +4,10 @@
     <dimen name="tvLoginMarginTop">30dp</dimen>
     <dimen name="imgButtonLogin">40dp</dimen>
     <dimen name="btLoginMarginLeftRight">60dp</dimen>
-    <dimen name="imgLoginSize">200dp</dimen>
+    <dimen name="imgLoginSize">150dp</dimen>
     <dimen name="imgBtLoginMargin">20dp</dimen>
     <dimen name="btLoginMarginTop">10dp</dimen>
+    <dimen name="tlMarginTopAndBot">75dp</dimen>
+    <dimen name="btDashTb">10dp</dimen>
 
 </resources>

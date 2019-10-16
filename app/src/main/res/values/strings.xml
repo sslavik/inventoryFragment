@@ -11,4 +11,10 @@
     <string name="btGoogle">Google</string>
     <string name="btFacebook">Login With Facebook</string>
     <string name="tvOther">Or Signup with...</string>
+    <string name="btInvetory">Invetorio</string>
+    <string name="btSectores">Sectores</string>
+    <string name="btProductos">Productos</string>
+    <string name="btPerfil">Perfil</string>
+    <string name="btAjustes">Ajustes</string>
+    <string name="btDependencias">Dependencias</string>
 </resources>

@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
-        runnable.run();
+        Thread.start(runnable);
     }
 
     private void initLogin(){

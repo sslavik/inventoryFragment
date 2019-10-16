@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DashActivity"
+    android:stretchColumns="0,1"
+    android:layout_gravity="center"
+    >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+        <LinearLayout android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_inventory_vector"
+                android:backgroundTint="@color/primaryDarkColor"
+                />
+            <Button
+                android:id="@+id/btIntentorio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/btDashTb"
+                android:background="@drawable/rectangle_round_dash"
+                android:text="@string/btInvetory"
+                />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btDependencias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/btDashTb"
+            android:background="@drawable/rectangle_round_dash"
+            android:text="@string/btDependencias" />
+    </TableRow>
+    <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        >
+        <Button
+            android:id="@+id/btSectores"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/btDashTb"
+            android:background="@drawable/rectangle_round_dash"
+            android:text="@string/btSectores"
+            />
+
+        <Button
+            android:id="@+id/btProductos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/btDashTb"
+            android:background="@drawable/rectangle_round_dash"
+            android:text="@string/btProductos"
+            />
+    </TableRow>
+    <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        >
+        <Button
+            android:id="@+id/btPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/btDashTb"
+            android:background="@drawable/rectangle_round_dash"
+            android:text="@string/btPerfil"
+            />
+
+        <Button
+            android:id="@+id/btAjustes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/btDashTb"
+            android:background="@drawable/rectangle_round_dash"
+            android:text="@string/btAjustes"
+            />
+    </TableRow>
+</TableLayout>

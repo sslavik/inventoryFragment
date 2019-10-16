@@ -83,12 +83,11 @@
     <Button
         android:id="@+id/btSignIn"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/btLoginMarginLeftRight"
-        android:layout_marginTop="@dimen/btLoginMarginTop"
         android:layout_marginRight="@dimen/btLoginMarginLeftRight"
         android:layout_weight="0"
-        android:background="@drawable/list_shape"
+        android:background="@drawable/selector_round_corner"
         android:gravity="center"
         android:text="@string/btSignIn" />
 

@@ -11,6 +11,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="AppTheme.DashTheme">
+
+    </style>
     <!--Vasmoa a crear una serie de estilos a través de la herencia-->
     <style name="Widget" parent="@android:style/Widget">
 
