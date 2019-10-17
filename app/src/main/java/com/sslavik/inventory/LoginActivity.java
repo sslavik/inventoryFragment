@@ -24,14 +24,14 @@ public class LoginActivity extends AppCompatActivity {
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, DashActivity.class));
+                startActivity(new Intent(LoginActivity.this, DashActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
             }
         });
         //Creamos un evento para Registrarnos
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
             }
         });
     }

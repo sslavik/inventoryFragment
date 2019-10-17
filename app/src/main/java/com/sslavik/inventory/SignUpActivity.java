@@ -48,8 +48,8 @@ public class SignUpActivity extends AppCompatActivity {
             // 1- Se guarda el usuario en la BD
             // 2- Envio de correo al usuario (Firebase)
             // 3- Se pasa por la ventana LogInActivity
-            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-            // intent.set(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(new Intent(SignUpActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+            // intent.set(Intent.FLAG_ACTIVITY_SINGLE_TOP)0
 
             finish();
         }
