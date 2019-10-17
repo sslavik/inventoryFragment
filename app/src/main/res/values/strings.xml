@@ -17,4 +17,8 @@
     <string name="btPerfil">Perfil</string>
     <string name="btAjustes">Ajustes</string>
     <string name="btDependencias">Dependencias</string>
+    <string name="tiedUser">Username</string>
+    <string name="tiedPassword">Password</string>
+    <string name="tiedEmail">Example@Email.com</string>
+    <string name="tiedPasswordRep">Confirm Password</string>
 </resources>

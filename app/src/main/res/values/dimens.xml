@@ -8,6 +8,9 @@
     <dimen name="imgBtLoginMargin">20dp</dimen>
     <dimen name="btLoginMarginTop">10dp</dimen>
     <dimen name="tlMarginTopAndBot">75dp</dimen>
-    <dimen name="btDashTb">10dp</dimen>
+    <dimen name="btDashTb">20dp</dimen>
+    <dimen name="ibtDashButton">20dp</dimen>
+    <dimen name="btSignUp">40dp</dimen>
+    <dimen name="tiedPadding">10dp</dimen>
 
 </resources>

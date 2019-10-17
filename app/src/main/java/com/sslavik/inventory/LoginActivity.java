@@ -11,18 +11,27 @@ public class LoginActivity extends AppCompatActivity {
 
     // Campos
     private Button btSignIn;
+    private Button btSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Instanciamos el Botón
+        // Instanciamos los Botones
         btSignIn = findViewById(R.id.btSignIn);
+        btSignUp = findViewById(R.id.btSignUpLogIn);
         // Creamos un evento
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, DashActivity.class));
+            }
+        });
+        //Creamos un evento para Registrarnos
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }

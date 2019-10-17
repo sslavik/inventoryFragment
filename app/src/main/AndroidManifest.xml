@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DashActivity"
+        <activity android:name=".SignUpActivity"></activity>
+        <activity
+            android:name=".DashActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme.SpalshTheme"></activity>
+            android:theme="@style/AppTheme.SpalshTheme" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/AppTheme.SpalshTheme"></activity>
+            android:theme="@style/AppTheme.SpalshTheme" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="sensorPortrait"

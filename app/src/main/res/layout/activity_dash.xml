@@ -13,32 +13,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
-        <LinearLayout android:orientation="vertical">
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_inventory_vector"
-                android:backgroundTint="@color/primaryDarkColor"
-                />
-            <Button
+                android:text="@string/btSectores"/>
+            <ImageButton
                 android:id="@+id/btIntentorio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/btDashTb"
                 android:background="@drawable/rectangle_round_dash"
-                android:text="@string/btInvetory"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_inventory_vector"
                 />
         </LinearLayout>
 
-
-        <Button
-            android:id="@+id/btDependencias"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/btDashTb"
-            android:background="@drawable/rectangle_round_dash"
-            android:text="@string/btDependencias" />
+        <LinearLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btDependencias"/>
+            <ImageButton
+                android:id="@+id/btDependecias"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_round_dash"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_project_diagram_solid"
+                />
+        </LinearLayout>
     </TableRow>
     <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
     <TableRow

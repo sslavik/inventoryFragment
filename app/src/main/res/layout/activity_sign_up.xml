@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiedUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/tiedPadding"
+            android:hint="@string/tiedUser" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/tilUser"
+        app:layout_constraintStart_toStartOf="@+id/tilUser"
+        app:layout_constraintTop_toBottomOf="@+id/tilUser">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiedPassword1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/tiedPadding"
+            android:inputType="textPassword"
+            android:hint="@string/tiedPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/tilPassword1"
+        app:layout_constraintStart_toStartOf="@+id/tilPassword1"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiedPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/tiedPadding"
+            android:inputType="textPassword"
+            android:hint="@string/tiedPasswordRep" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="@+id/tilPassword2"
+        app:layout_constraintStart_toStartOf="@+id/tilPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiedEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/tiedPadding"
+            android:inputType="textEmailAddress"
+            android:hint="@string/tiedEmail" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btSingUpSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rectangle_round"
+        android:paddingLeft="@dimen/btSignUp"
+        android:paddingRight="@dimen/btSignUp"
+        android:text="@string/btSignUp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
