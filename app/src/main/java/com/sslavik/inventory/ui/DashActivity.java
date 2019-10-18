@@ -1,8 +1,10 @@
-package com.sslavik.inventory;
+package com.sslavik.inventory.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.sslavik.inventory.R;
 
 public class DashActivity extends AppCompatActivity {
 
