@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="errUserEmpty">User can\'t be less than 4 characters</string>
+    <string name="errPassword"><![CDATA[Incorrect Password [ Between 8 & 12 | 1 Number | 1 Uppercase ]]]></string>
+    <string name="errEmail">Not a Email</string>
 </resources>
