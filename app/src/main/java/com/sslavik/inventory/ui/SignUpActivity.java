@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,13 +22,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     private Button btSignUp;
     private TextInputEditText tiedUser;
-    private TextInputEditText tiedPassword1;
-    private TextInputEditText tiedPassword2;
+    private TextInputEditText tiedPassword;
     private TextInputEditText tiedEmail;
 
     private TextInputLayout tilUser;
-    private TextInputLayout tilPassword1;
-    private TextInputLayout tilPassword2;
+    private TextInputLayout tilPassword;
     private TextInputLayout tilEmail;
 
     @Override
@@ -39,16 +36,16 @@ public class SignUpActivity extends AppCompatActivity {
         // Instancia TextInputEditText
         btSignUp = findViewById(R.id.btSingUpSignUp);
         tiedUser = findViewById(R.id.tiedUser);
-        tiedPassword1 = findViewById(R.id.tiedPassword1);
-        tiedPassword2 = findViewById(R.id.tiedPassword2);
+        tiedPassword = findViewById(R.id.tiedPassword);
         tiedEmail = findViewById(R.id.tiedEmail);
         // TextInputLayout
         tilUser = findViewById(R.id.tilUser);
-        tilPassword1 = findViewById(R.id.tilPassword1);
-        tilPassword2 = findViewById(R.id.tilPassword2);
+        tilPassword = findViewById(R.id.tilPassword);
         tilEmail = findViewById(R.id.tilEmail);
         // TextChanged
         tiedUser.addTextChangedListener(new SignUpWatcher(tiedUser));
+        tiedEmail.addTextChangedListener(new SignUpWatcher(tiedEmail));
+        tiedPassword.addTextChangedListener(new SignUpWatcher(tiedPassword));
         // Evento OnClick SignUp
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private void validate() {
         if(validateUser(tiedUser)
-                && validatePassword(tiedPassword1, tiedPassword2)
+                && validatePassword(tiedPassword)
                 && CommonUtils.validateEmail(tiedEmail.getText().toString())) {
             // 1- Se guarda el usuario en la BD
             // 2- Envio de correo al usuario (Firebase)
@@ -87,19 +84,17 @@ public class SignUpActivity extends AppCompatActivity {
      * 5. No puede ser vacio
      * @return Valida Contraseña
      */
-    private boolean validatePassword(View view, View view2) {
+    private boolean validatePassword(View view) {
         String pass1 = ((TextInputEditText)view).getText().toString();
-        String pass2 = ((TextInputEditText)view2).getText().toString();
-        Log.d("SignIn", " Equals : " + pass1.equals(pass2) + "Length: " + (pass1.length() >= 8 && pass1.length() <= 12) + " mayus : " + pass1.matches(".*([A-Z]){1,}.*") + " num : " + pass1.matches(".*([0-9]){1,}.*"));
+        Log.d("SignIn", "Length: " + (pass1.length() >= 8 && pass1.length() <= 12) + " mayus : " + pass1.matches(".*([A-Z]){1,}.*") + " num : " + pass1.matches(".*([0-9]){1,}.*"));
         if(pass1.length() >= 8
-                && pass1.length() <= 12
-                && pass1.equals(pass2)
+                && pass1.length() <= 20
                 && pass1.matches(".*([A-Z]){1,}.*")
                 && pass1.matches(".*([0-9]){1,}.*")){
             return true;
         } else {
             displaySoftKeyboard(view);
-            tilPassword1.setError(getString(R.string.errEmail));
+            tilPassword.setError(getString(R.string.errPassword));
             return false;
         }
     }
@@ -150,11 +145,11 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                     else tilUser.setError(null);
                     break;
-                case R.id.tiedPassword1:
-                    if(!validatePassword(view, tiedPassword2)){
-                        tilPassword1.setError(getString(R.string.errPassword));
+                case R.id.tiedPassword:
+                    if(!validatePassword(tiedPassword)){
+                        tilPassword.setError(getString(R.string.errPassword));
                     }
-                    else tilPassword1.setError(null);
+                    else tilPassword.setError(null);
                     break;
                 case R.id.tiedEmail:
                     if(!CommonUtils.validateEmail(((TextInputEditText)view).getText().toString())){
