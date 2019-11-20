@@ -2,15 +2,13 @@ package com.sslavik.inventory.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.sslavik.inventory.R;
-import com.sslavik.inventory.ui.dependency.DependencyListActivity;
+import com.sslavik.inventory.ui.dependency.DependencyActivity;
 
 public class DashActivity extends AppCompatActivity {
 
@@ -34,6 +32,6 @@ public class DashActivity extends AppCompatActivity {
     }
 
     private void startDependency(){
-        startActivity(new Intent(this, DependencyListActivity.class));
+        startActivity(new Intent(DashActivity.this, DependencyActivity.class));
     }
 }

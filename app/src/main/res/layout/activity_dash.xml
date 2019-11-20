@@ -13,39 +13,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:padding="@dimen/btDashTb"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/tvInventory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btSectores"/>
+                android:textAlignment="center"
+                android:text="@string/btInvetory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/btIntentorio"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
                 android:src="@drawable/ic_inventory_vector"
-                />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="@+id/tvInventory"
+                app:layout_constraintStart_toStartOf="@+id/tvInventory"
+                app:layout_constraintTop_toBottomOf="@+id/tvInventory" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:padding="@dimen/btDashTb"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/tvDepedency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btDependencias"/>
+                android:textAlignment="center"
+                android:text="@string/btDependencias"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/btDependecias"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
                 android:src="@drawable/ic_project_diagram_solid"
-                />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="@+id/tvDepedency"
+                app:layout_constraintStart_toStartOf="@+id/tvDepedency"
+                app:layout_constraintTop_toBottomOf="@+id/tvDepedency" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </TableRow>
     <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
     <TableRow
@@ -53,23 +70,54 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         >
-        <Button
-            android:id="@+id/btSectores"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/btDashTb"
-            android:background="@drawable/rectangle_round_dash"
-            android:text="@string/btSectores"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btProductos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/btDashTb"
-            android:background="@drawable/rectangle_round_dash"
-            android:text="@string/btProductos"
-            />
+            <TextView
+                android:id="@+id/tvSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/btDependencias"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btSector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_round_dash"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_project_diagram_solid"
+                app:layout_constraintEnd_toEndOf="@+id/tvSection"
+                app:layout_constraintStart_toStartOf="@+id/tvSection"
+                app:layout_constraintTop_toBottomOf="@+id/tvSection" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/btProductos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btProductos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_round_dash"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_project_diagram_solid"
+                app:layout_constraintEnd_toEndOf="@+id/tvProducts"
+                app:layout_constraintStart_toStartOf="@+id/tvProducts"
+                app:layout_constraintTop_toBottomOf="@+id/tvProducts" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </TableRow>
     <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
     <TableRow
