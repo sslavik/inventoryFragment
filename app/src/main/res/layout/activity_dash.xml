@@ -29,8 +29,8 @@
 
             <ImageButton
                 android:id="@+id/btIntentorio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
                 android:src="@drawable/ic_inventory_vector"
@@ -54,8 +54,8 @@
 
             <ImageButton
                 android:id="@+id/btDependecias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
                 android:src="@drawable/ic_project_diagram_solid"
@@ -85,11 +85,11 @@
 
             <ImageButton
                 android:id="@+id/btSector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
-                android:src="@drawable/ic_project_diagram_solid"
+                android:src="@drawable/ic_table_solid"
                 app:layout_constraintEnd_toEndOf="@+id/tvSection"
                 app:layout_constraintStart_toStartOf="@+id/tvSection"
                 app:layout_constraintTop_toBottomOf="@+id/tvSection" />
@@ -109,11 +109,11 @@
 
             <ImageButton
                 android:id="@+id/btProductos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/rectangle_round_dash"
                 android:padding="@dimen/ibtDashButton"
-                android:src="@drawable/ic_project_diagram_solid"
+                android:src="@drawable/ic_tags_solid"
                 app:layout_constraintEnd_toEndOf="@+id/tvProducts"
                 app:layout_constraintStart_toStartOf="@+id/tvProducts"
                 app:layout_constraintTop_toBottomOf="@+id/tvProducts" />
