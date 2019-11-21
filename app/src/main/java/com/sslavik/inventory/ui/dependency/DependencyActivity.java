@@ -1,25 +1,19 @@
 package com.sslavik.inventory.ui.dependency;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.sslavik.inventory.R;
-import com.sslavik.inventory.adapter.DependencyAdapter;
 import com.sslavik.inventory.data.model.Dependency;
 
-public class DependencyActivity extends AppCompatActivity implements DependencyAddFragment.OnFragmentInteractionListener ,DependencyAdapter.OnClickHolderListener, DependencyFragment.OnAddDependencyListener {
+public class DependencyActivity extends AppCompatActivity implements DependencyFragment.OnManageDependencyListener {
 
     //Fragments que tiene
     private DependencyFragment dependencyFragment;
-    private DependencyAddFragment dependencyAddFragment;
+    private DependencyManageFragment dependencyManageFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +38,29 @@ public class DependencyActivity extends AppCompatActivity implements DependencyA
         }
     }
 
-    @Override
-    public void onClick(Dependency dependency) {
-        Toast.makeText(this, dependency.toString(), Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void onAddDependency() {
-        showAddFragrament();
-    }
-
-    private void showAddFragrament() {
+    // Muestra el fragmento con los datos o sin ellos
+    private void showAddFragrament(Bundle bundle) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        dependencyAddFragment = (DependencyAddFragment)fragmentManager.findFragmentByTag(DependencyAddFragment.TAG);
-        if(dependencyAddFragment == null){
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            dependencyAddFragment = DependencyAddFragment.newInstance(null);
-            fragmentTransaction.replace(android.R.id.content, dependencyAddFragment, DependencyAddFragment.TAG);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+        dependencyManageFragment = (DependencyManageFragment)fragmentManager.findFragmentByTag(DependencyManageFragment.TAG);
+        if(dependencyManageFragment == null) {
+            if(bundle.getParcelable("Dependency") == null) {
+                dependencyManageFragment = DependencyManageFragment.newInstance(null);
+            } else {
+                dependencyManageFragment = DependencyManageFragment.newInstance(bundle);
+            }
         }
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(android.R.id.content, dependencyManageFragment, DependencyManageFragment.TAG);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onManageDependency(Dependency dependency) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Dependency",dependency);
+        showAddFragrament(bundle);
     }
 }

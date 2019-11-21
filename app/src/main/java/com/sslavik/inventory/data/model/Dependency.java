@@ -1,12 +1,47 @@
 package com.sslavik.inventory.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
-public class Dependency {
+public class Dependency implements Parcelable {
     private String name;
     private String shortName;
     private String description;
+    private String inventory;
     private String image;
+
+    // CONSTRUCTOR
+
+    public Dependency(String name, String shortName, String description, String inventory, String image) {
+        this.name = name;
+        this.shortName = shortName;
+        this.description = description;
+        this.inventory = inventory;
+        this.image = image;
+    }
+
+
+    protected Dependency(Parcel in) {
+        name = in.readString();
+        shortName = in.readString();
+        description = in.readString();
+        inventory = in.readString();
+        image = in.readString();
+    }
+
+    public static final Creator<Dependency> CREATOR = new Creator<Dependency>() {
+        @Override
+        public Dependency createFromParcel(Parcel in) {
+            return new Dependency(in);
+        }
+
+        @Override
+        public Dependency[] newArray(int size) {
+            return new Dependency[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -40,6 +75,14 @@ public class Dependency {
         this.image = image;
     }
 
+    public String getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(String inventory) {
+        this.inventory = inventory;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -49,12 +92,18 @@ public class Dependency {
                 "Descripcion : " + getDescription()+
                 "Imagen : " + getImage() ;
     }
-    // CONSTRUCTOR
 
-    public Dependency(String name, String shortName, String description, String image) {
-        this.name = name;
-        this.shortName = shortName;
-        this.description = description;
-        this.image = image;
+    @Override
+    public int describeContents() {
+        return CONTENTS_FILE_DESCRIPTOR;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(shortName);
+        dest.writeString(description);
+        dest.writeString(inventory);
+        dest.writeString(image);
     }
 }

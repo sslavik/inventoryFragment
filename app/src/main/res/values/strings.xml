@@ -1,4 +1,12 @@
 <resources>
+    <string-array name="spInventory">
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+    </string-array>
     <string name="app_name">Inventory</string>
     <string name="tvUser">User Name/email address</string>
     <string name="edUser">User</string>
@@ -23,4 +31,7 @@
     <string name="tiedPasswordRep">Confirm Password</string>
     <string name="name">Nombre</string>
     <string name="hello_blank_fragment">Blank Fragment</string>
+    <string name="tvShortName">Nombre Corto</string>
+    <string name="tvLongName">Nombre</string>
+    <string name="tvInventory">Inventario</string>
 </resources>

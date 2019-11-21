@@ -17,5 +17,6 @@
     <dimen name="llItemPadding">16dp</dimen>
     <dimen name="fabElevation">6dp</dimen>
     <dimen name="fabMargin">16dp</dimen>
+    <dimen name="spinner">16dp</dimen>
 
 </resources>

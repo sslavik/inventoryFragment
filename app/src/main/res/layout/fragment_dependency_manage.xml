@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dependency.DependencyManageFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvShortName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tvShortName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edShortName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/tvShortName"
+            app:layout_constraintTop_toBottomOf="@+id/tvShortName" />
+
+        <TextView
+            android:id="@+id/tvLongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tvLongName"
+            app:layout_constraintStart_toStartOf="@+id/edShortName"
+            app:layout_constraintTop_toBottomOf="@+id/edShortName" />
+
+        <EditText
+            android:id="@+id/edLongName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/tvLongName"
+            app:layout_constraintTop_toBottomOf="@+id/tvLongName" />
+
+        <TextView
+            android:id="@+id/tvInventoryManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvInventory"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/edLongName"
+            app:layout_constraintTop_toBottomOf="@+id/edLongName" />
+
+        <Spinner
+            android:id="@+id/spInventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/tvInventoryManager"
+            android:entries="@array/spInventory"
+            />
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tvInventory"
+            app:layout_constraintStart_toStartOf="@+id/spInventory"
+            app:layout_constraintTop_toBottomOf="@+id/spInventory" />
+
+        <EditText
+            android:id="@+id/edDescription"
+            android:layout_margin="@dimen/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/tvDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

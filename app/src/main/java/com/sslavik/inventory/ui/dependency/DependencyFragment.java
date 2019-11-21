@@ -19,23 +19,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class DependencyFragment extends Fragment implements DependencyAdapter.OnClickHolderListener {
+public class DependencyFragment extends Fragment {
 
+    // DELEGADOS
+    // Este objeto recoge los eventos del adapter
+    private DependencyAdapter.OnManageDependencyListener onManageDependencyAdapterListener;
 
     //INTERFAZ
-    interface OnAddDependencyListener{
-        void onAddDependency();
+    interface OnManageDependencyListener {
+        void onManageDependency(Dependency dependency);
     }
 
 
-
-    public static final String TAG = "DependencyFragment" ;
     // CAMPOS
+    public static final String TAG = "DependencyFragment" ;
     private static final int SPAN_COUNT = 3;
     private RecyclerView rvDependency;
     private DependencyAdapter dependencyAdapter ;
     private FloatingActionButton fabAdd;
-    private OnAddDependencyListener onAddDependencyListener;
+    private OnManageDependencyListener onManageDependencyListener;
 
 
     // INSTANCIA DE UN FRAGMENT DINAMICO
@@ -50,7 +52,7 @@ public class DependencyFragment extends Fragment implements DependencyAdapter.On
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            onAddDependencyListener = (OnAddDependencyListener) context;
+            onManageDependencyListener = (OnManageDependencyListener) context;
         } catch (Exception e){
             throw e;
         }
@@ -91,15 +93,18 @@ public class DependencyFragment extends Fragment implements DependencyAdapter.On
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAddDependencyListener.onAddDependency();
+                onManageDependencyListener.onManageDependency(null);
             }
         });
     }
 
     private void initRecyclerViewDependency() {
 
+        // Inicializamos el Delegado del DependencyAdapter
+        initDependencyAdapterListener(onManageDependencyListener);
+
         // INSTANCIAMOS ADAPTER
-        dependencyAdapter = new DependencyAdapter(getActivity(), this);
+        dependencyAdapter = new DependencyAdapter(getActivity(), onManageDependencyAdapterListener);
         // Creamos diseño del RecyclerView
         // OPCION 1
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
@@ -110,8 +115,32 @@ public class DependencyFragment extends Fragment implements DependencyAdapter.On
         rvDependency.setAdapter(dependencyAdapter);
     }
 
-    @Override
-    public void onClick(Dependency dependency) {
-        Toast.makeText(getActivity(), dependency.toString(), Toast.LENGTH_SHORT).show();
+    private void initDependencyAdapterListener(final OnManageDependencyListener onManageDependencyListener) {
+
+        onManageDependencyAdapterListener = new DependencyAdapter.OnManageDependencyListener() {
+
+            // METODOS DEL INTERFAZ DependencyAdapter
+
+            /**
+             * Se ha pulsado sobre un elemento de la lista y hay que mostrar el fragment DependencymanageFragment. Se llama al método de la Activity
+             * Para mostar el fragment
+             * @param dependency
+             */
+            @Override
+            public void onUpdateDependency(Dependency dependency) {
+                Toast.makeText(getActivity(), "Click en : " + dependency.toString(), Toast.LENGTH_SHORT).show();
+                onManageDependencyListener.onManageDependency(dependency);
+            }
+            /**
+             * Este método muestra un cuadro de dialogo pidiendo la confirmación del borrado de la dependencia
+             * @param dependency
+             */
+            @Override
+            public void onDeleteDependency(Dependency dependency) {
+                Toast.makeText(getActivity(), "Intento de borrado en la dependencia :" + dependency.getName(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
     }
+
 }

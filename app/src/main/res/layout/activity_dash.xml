@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvDepedency" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </TableRow>
-    <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,28 +119,61 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvProducts" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </TableRow>
-    <View android:layout_height="2dp" android:background="@color/primaryDarkColor"/>
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         >
-        <Button
-            android:id="@+id/btPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/btDashTb"
-            android:background="@drawable/rectangle_round_dash"
-            android:text="@string/btPerfil"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btAjustes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/btDashTb"
-            android:background="@drawable/rectangle_round_dash"
-            android:text="@string/btAjustes"
-            />
+            <TextView
+                android:id="@+id/tvUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/btPerfil"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btUsuario"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/rectangle_round_dash"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_user_regular"
+                app:layout_constraintEnd_toEndOf="@+id/tvUser"
+                app:layout_constraintStart_toStartOf="@+id/tvUser"
+                app:layout_constraintTop_toBottomOf="@+id/tvUser" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/btDashTb"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/btAjustes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btAjustes"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/rectangle_round_dash"
+                android:padding="@dimen/ibtDashButton"
+                android:src="@drawable/ic_sliders_h_solid"
+                app:layout_constraintEnd_toEndOf="@+id/tvSettings"
+                app:layout_constraintStart_toStartOf="@+id/tvSettings"
+                app:layout_constraintTop_toBottomOf="@+id/tvSettings" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </TableRow>
 </TableLayout>

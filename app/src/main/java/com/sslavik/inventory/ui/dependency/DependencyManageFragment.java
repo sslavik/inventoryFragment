@@ -4,34 +4,37 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.sslavik.inventory.R;
+import com.sslavik.inventory.data.model.Dependency;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DependencyAddFragment#newInstance} factory method to
+ * Use the {@link DependencyManageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DependencyAddFragment extends Fragment {
-    public static final String TAG = "DependencyAddFragment";
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class DependencyManageFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    // CAMPOS
+    public static final String TAG = "DependencyManageFragment";
+    private EditText edShortName;
+    private EditText edLongName;
+    private Spinner spInventory;
+    private EditText edDescription;
 
-    private OnFragmentInteractionListener listener;
-
-    public DependencyAddFragment() {
+    public DependencyManageFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +42,11 @@ public class DependencyAddFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment DependencyAddFragment.
+     * @return A new instance of fragment DependencyManageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DependencyAddFragment newInstance(Bundle bundle) {
-        DependencyAddFragment fragment = new DependencyAddFragment();
+    public static DependencyManageFragment newInstance(Bundle bundle) {
+        DependencyManageFragment fragment = new DependencyManageFragment();
         if ( bundle != null ){
             fragment.setArguments(bundle);
         }
@@ -62,25 +65,37 @@ public class DependencyAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dependency_add, container, false);
+        return inflater.inflate(R.layout.fragment_dependency_manage, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        edShortName = view.findViewById(R.id.edShortName);
+        edLongName = view.findViewById(R.id.edLongName);
+        edDescription = view.findViewById(R.id.edDescription);
+        spInventory = view.findViewById(R.id.spInventory);
+
+        // DEVOLVEMOS EL BUDLE PASADO AL MANAGER
+        Bundle bundle = getArguments();
+
+        if(bundle != null) {
+            Dependency dependency = bundle.getParcelable("Dependency");
+            edShortName.setText(dependency.getShortName());
+            edLongName.setText(dependency.getName());
+            edDescription.setText(dependency.getDescription());
+            spInventory.setSelection(0);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        listener = null;
     }
 
     /**
