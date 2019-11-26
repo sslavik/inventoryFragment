@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import java.util.Objects;
 
 public class Dependency implements Parcelable {
     private String name;
@@ -43,6 +46,10 @@ public class Dependency implements Parcelable {
         }
     };
 
+    public Dependency() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -81,6 +88,19 @@ public class Dependency implements Parcelable {
 
     public void setInventory(String inventory) {
         this.inventory = inventory;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Dependency that = (Dependency) obj;
+        return shortName.equals(that.shortName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shortName);
     }
 
     @NonNull

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -52,8 +52,8 @@
             android:id="@+id/tvInventoryManager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tvInventory"
             android:layout_marginTop="16dp"
+            android:text="@string/tvInventory"
             app:layout_constraintStart_toStartOf="@+id/edLongName"
             app:layout_constraintTop_toBottomOf="@+id/edLongName" />
 
@@ -62,9 +62,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spinner"
-            app:layout_constraintTop_toBottomOf="@+id/tvInventoryManager"
             android:entries="@array/spInventory"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tvInventoryManager" />
+
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
@@ -76,13 +76,23 @@
 
         <EditText
             android:id="@+id/edDescription"
-            android:layout_margin="@dimen/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spinner"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/tvDescription"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabManageDependency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:clickable="true"
+        android:layout_margin="@dimen/fabMargin"
+        android:src="@drawable/ic_add_24dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

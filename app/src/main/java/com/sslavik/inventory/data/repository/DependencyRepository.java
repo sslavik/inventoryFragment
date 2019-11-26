@@ -56,4 +56,16 @@ public class DependencyRepository {
     public List<Dependency> getList() {
         return listDependency;
     }
+
+    public void add(Dependency dependency){
+
+    }
+
+    public void edit(Dependency dependency){
+
+    }
+
+    public void delete(Dependency dependency){
+
+    }
 }

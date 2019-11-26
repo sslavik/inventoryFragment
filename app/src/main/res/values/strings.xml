@@ -34,4 +34,7 @@
     <string name="tvShortName">Nombre Corto</string>
     <string name="tvLongName">Nombre</string>
     <string name="tvInventory">Inventario</string>
+    <string name="errNameEmpty">ERROR: Needed Long Name</string>
+    <string name="errShortNameEmpty">ERROR: Needed Short Name</string>
+    <string name="errDescriptionEmpty">ERROR: Needed Description</string>
 </resources>

@@ -19,11 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class DependencyFragment extends Fragment {
+import java.util.List;
+
+public class DependencyFragment extends Fragment implements DependencyListContract.View {
 
     // DELEGADOS
     // Este objeto recoge los eventos del adapter
     private DependencyAdapter.OnManageDependencyListener onManageDependencyAdapterListener;
+    private DependencyListContract.Presenter presenter;
 
     //INTERFAZ
     interface OnManageDependencyListener {
@@ -142,5 +145,40 @@ public class DependencyFragment extends Fragment {
         };
 
     }
+
+    //region IMPLEMENTACIÓN DE INTERFACES
+
+
+    @Override
+    public void showLoadProgress() {
+
+    }
+
+    @Override
+    public void hideLoadProgress() {
+
+    }
+
+    @Override
+    public void showNoData() {
+
+    }
+
+    @Override
+    public void showData(List<Dependency> dependencyList) {
+
+    }
+
+    @Override
+    public void setPresenter(DependencyListContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void showError(String error) {
+
+    }
+
+    //endregion
 
 }

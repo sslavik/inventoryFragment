@@ -11,9 +11,12 @@ import com.sslavik.inventory.data.model.Dependency;
 
 public class DependencyActivity extends AppCompatActivity implements DependencyFragment.OnManageDependencyListener {
 
-    //Fragments que tiene
+    // FRAGMENTS IMPLEMENTADOS
     private DependencyFragment dependencyFragment;
     private DependencyManageFragment dependencyManageFragment;
+    // PRESENTADORES DE LOS FRAGMENTS
+    private DependencyManagePresenter dependencyManagePresenter;
+    private DependencyListPresenter dependencyListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
         if(dependencyFragment == null){
             dependencyFragment = (DependencyFragment) DependencyFragment.newInstance(null);
             fragmentManager.beginTransaction().add(android.R.id.content, dependencyFragment, DependencyFragment.TAG).commit();
+            // Creamos el presentador para el DependencyList
+            dependencyListPresenter = new DependencyListPresenter(dependencyFragment);
         }
     }
 
