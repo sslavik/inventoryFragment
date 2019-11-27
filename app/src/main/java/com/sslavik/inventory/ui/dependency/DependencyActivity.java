@@ -40,6 +40,7 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
             fragmentManager.beginTransaction().add(android.R.id.content, dependencyFragment, DependencyFragment.TAG).commit();
             // Creamos el presentador para el DependencyList
             dependencyListPresenter = new DependencyListPresenter(dependencyFragment);
+            dependencyFragment.setPresenter(dependencyListPresenter);
         }
     }
 
@@ -59,6 +60,8 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
         fragmentTransaction.replace(android.R.id.content, dependencyManageFragment, DependencyManageFragment.TAG);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        dependencyManagePresenter = new DependencyManagePresenter(dependencyManageFragment);
+
 
     }
 

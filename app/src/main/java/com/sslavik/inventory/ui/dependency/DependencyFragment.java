@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sslavik.inventory.R;
 import com.sslavik.inventory.adapter.DependencyAdapter;
@@ -41,6 +42,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     private DependencyAdapter dependencyAdapter ;
     private FloatingActionButton fabAdd;
     private OnManageDependencyListener onManageDependencyListener;
+    private LottieAnimationView animationNodata;
 
 
     // INSTANCIA DE UN FRAGMENT DINAMICO
@@ -50,7 +52,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
             fragment.setArguments(bundle);
         return fragment;
     }
-
+    // region
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -76,6 +78,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        animationNodata = view.findViewById(R.id.animation_nodata);
         // PASADO DEL OnCreate del Acitvity
         // INSTANCIAMOS FloatingButton
         fabAdd = view.findViewById(R.id.fabAdd);
@@ -90,6 +93,16 @@ public class DependencyFragment extends Fragment implements DependencyListContra
         initFabAdd();
 
 
+    }
+
+    /**
+     * Solicita la carga de datos al presentador
+     */
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.load();
     }
 
     private void initFabAdd() {
@@ -151,6 +164,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
 
     @Override
     public void showLoadProgress() {
+        animationNodata.setVisibility(View.INVISIBLE);
 
     }
 
@@ -161,17 +175,17 @@ public class DependencyFragment extends Fragment implements DependencyListContra
 
     @Override
     public void showNoData() {
-
+        animationNodata.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showData(List<Dependency> dependencyList) {
-
+        animationNodata.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void setPresenter(DependencyListContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override

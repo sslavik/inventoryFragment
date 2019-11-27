@@ -54,7 +54,9 @@ public class DependencyRepository {
     }
 
     public List<Dependency> getList() {
-        return listDependency;
+        // NO DEVOLVEMOS NADA
+        //return listDependency;
+        return new ArrayList<Dependency>();
     }
 
     public void add(Dependency dependency){

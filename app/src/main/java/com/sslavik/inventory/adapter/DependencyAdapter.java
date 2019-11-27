@@ -14,6 +14,7 @@ import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.model.Dependency;
 import com.sslavik.inventory.data.repository.DependencyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,7 +37,7 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
      * Los datos los vamos a obtener directamente desde el Repository
      */
     public DependencyAdapter(Context context, OnManageDependencyListener onClickHolderListener) {
-        this.listDependency = DependencyRepository.getInstance().getList();
+        this.listDependency = new ArrayList<>();
         this.listener = onClickHolderListener;
         this.context = context;
     }
@@ -83,5 +84,13 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
             tvName = itemView.findViewById(R.id.tvName);
             mliIcono = itemView.findViewById(R.id.mliIcono);
         }
+    }
+
+    public void clear(){
+        listDependency.clear();
+    }
+
+    public void load(List<Dependency> dependencyList){
+        listDependency.addAll(dependencyList);
     }
 }
