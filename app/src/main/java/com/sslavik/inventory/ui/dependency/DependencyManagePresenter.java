@@ -1,6 +1,9 @@
 package com.sslavik.inventory.ui.dependency;
 
+import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.data.repository.DependencyRepository;
+
 
 public class DependencyManagePresenter implements DependencyManageContract.Presenter {
 
@@ -18,16 +21,18 @@ public class DependencyManagePresenter implements DependencyManageContract.Prese
 
     @Override
     public void validateDependency(Dependency dependency) {
-        view.onSuccessValidate();
+        view.onSuccessValidate(dependency);
     }
 
     @Override
     public void add(Dependency dependency) {
-
+        if(!DependencyRepository.getInstance().add(dependency))
+            view.showError(R.string.errDependencyExists);
     }
 
     @Override
     public void edit(Dependency dependency) {
-
+        if(!DependencyRepository.getInstance().edit(dependency))
+            view.showError(R.string.errDependencyNoEdited);
     }
 }

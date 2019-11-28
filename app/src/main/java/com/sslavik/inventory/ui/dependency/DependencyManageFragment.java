@@ -26,10 +26,11 @@ import com.sslavik.inventory.data.model.Dependency;
  * Use the {@link DependencyManageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DependencyManageFragment extends Fragment implements DependencyManageContract.View {
+public class DependencyManageFragment extends Fragment implements DependencyManageContract.View, DependencyFragment.OnManageDependencyListener {
 
     // DELEGADO
     private DependencyManageContract.Presenter dependencyManagePresenter;
+    private DependencyFragment.OnManageDependencyListener onManageDependencyListener;
 
     // CAMPOS
     public static final String TAG = "DependencyManageFragment";
@@ -139,15 +140,15 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
     private boolean isDependencyValid() {
         // RN1: campos no vacíos
         if (TextUtils.isEmpty(edLongName.getText().toString())) {
-            showError(getString(R.string.errNameEmpty));
+            showError(R.string.errNameEmpty);
             return false;
         }
         if (TextUtils.isEmpty(edShortName.getText().toString())) {
-            showError(getString(R.string.errShortNameEmpty));
+            showError(R.string.errShortNameEmpty);
             return false;
         }
         if (TextUtils.isEmpty(edDescription.getText().toString())) {
-            showError(getString(R.string.errDescriptionEmpty));
+            showError(R.string.errDescriptionEmpty);
             return false;
         }
         return true;
@@ -159,14 +160,14 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
      * Es llamado desde el Presenter después de comprobar que la dependencia es correcta.
      */
     @Override
-    public void onSuccessValidate() {
-        Dependency dependency = new Dependency();
+    public void onSuccessValidate(Dependency dependency) {
         if(getArguments() != null){
             dependencyManagePresenter.edit(dependency);
         }
         else {
             dependencyManagePresenter.add(dependency);
         }
+        getActivity().onBackPressed();
     }
     // Métodos del contrato DependencyManageContract
     @Override
@@ -175,8 +176,15 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
     }
 
     @Override
-    public void showError(String error) {
-        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+    public void showError(int error) {
+        Toast.makeText(getContext(), getResources().getString(error), Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onManageDependency(Dependency dependency, boolean edit) {
+        if(edit)
+            dependencyManagePresenter.edit(dependency);
+        else
+            dependencyManagePresenter.add(dependency);
+    }
 }

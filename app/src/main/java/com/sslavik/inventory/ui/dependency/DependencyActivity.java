@@ -61,12 +61,13 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         dependencyManagePresenter = new DependencyManagePresenter(dependencyManageFragment);
+        dependencyManageFragment.setPresenter(dependencyManagePresenter);
 
 
     }
 
     @Override
-    public void onManageDependency(Dependency dependency) {
+    public void onManageDependency(Dependency dependency, boolean edit) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("Dependency",dependency);
         showAddFragrament(bundle);

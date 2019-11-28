@@ -20,19 +20,17 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
     @Override
     public void delete(Dependency dependency) {
+        // 1 REALIZAMOS LA OPERACIÓN DEL REPOSITORIO y COMPROBAMSO ELRESULTADO
+        if(DependencyRepository.getInstance().delete(dependency)){
 
+        }
     }
 
     @Override
-    public List<Dependency> load() throws ExecutionException, InterruptedException {
-        // DependencyList
-        List<Dependency> dependencies;
-
-        // Obtenemos el Fragment
-        DependencyFragment dependencyFragment = (DependencyFragment)view;
+    public void load() {
 
         // SACAMOS LOS DATOS DEL REPOSITORY
-        dependencies = new AsyncTask<Void,Void, List<Dependency>>() {
+        new AsyncTask<Void,Void, List<Dependency>>() {
 
             @Override
             protected void onPreExecute() {
@@ -43,7 +41,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
             @Override
             protected List<Dependency> doInBackground (Void...voids){
                 try{
-                    Thread.sleep(0);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 }
@@ -64,9 +62,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
                 else
                     view.showData(dependencyList);
             }
-        }.execute().get();
-
-        return dependencies;
+        }.execute();
 
     }
 

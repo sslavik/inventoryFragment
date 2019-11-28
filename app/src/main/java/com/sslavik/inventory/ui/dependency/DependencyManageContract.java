@@ -6,7 +6,7 @@ import com.sslavik.inventory.ui.base.BaseView;
 public interface DependencyManageContract {
 
     interface View extends BaseView<Presenter> {
-        void onSuccessValidate();
+        void onSuccessValidate(Dependency dependency);
     }
 
     interface Presenter {

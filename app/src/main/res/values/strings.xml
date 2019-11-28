@@ -37,4 +37,9 @@
     <string name="errNameEmpty">ERROR: Needed Long Name</string>
     <string name="errShortNameEmpty">ERROR: Needed Short Name</string>
     <string name="errDescriptionEmpty">ERROR: Needed Description</string>
+    <string name="errDependencyExists">ERROR: Dependency already exists</string>
+    <string name="errDependencyNoEdited">ERROR: Cannot be edited</string>
+    <string name="btnOk">Accept</string>
+    <string name="title_delete">Delete</string>
+    <string name="message_delete">You want to delete :</string>
 </resources>

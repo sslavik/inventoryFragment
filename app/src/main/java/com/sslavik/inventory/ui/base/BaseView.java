@@ -7,5 +7,5 @@ package com.sslavik.inventory.ui.base;
 public interface BaseView<T> {
 
         void setPresenter(T presenter);
-        void showError(String error);
+        void showError(int error);
 }

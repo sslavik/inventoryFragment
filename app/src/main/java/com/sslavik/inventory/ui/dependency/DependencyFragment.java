@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sslavik.inventory.R;
 import com.sslavik.inventory.adapter.DependencyAdapter;
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.ui.base.BaseDialogFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,16 +23,19 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class DependencyFragment extends Fragment implements DependencyListContract.View {
+public class DependencyFragment extends Fragment implements DependencyListContract.View, BaseDialogFragment.OnFinishDialog {
 
+    private static final int REQUEST_CODE_DELETE = 300;
     // DELEGADOS
     // Este objeto recoge los eventos del adapter
     private DependencyAdapter.OnManageDependencyListener onManageDependencyAdapterListener;
     private DependencyListContract.Presenter presenter;
 
+
+
     //INTERFAZ
     interface OnManageDependencyListener {
-        void onManageDependency(Dependency dependency);
+        void onManageDependency(Dependency dependency, boolean edit);
     }
 
 
@@ -43,6 +47,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     private FloatingActionButton fabAdd;
     private OnManageDependencyListener onManageDependencyListener;
     private LottieAnimationView animationNodata;
+    Dependency deleted;
 
 
     // INSTANCIA DE UN FRAGMENT DINAMICO
@@ -102,18 +107,20 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void onStart() {
         super.onStart();
-        try {
-            dependencyAdapter.load(presenter.load());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.load();
     }
 
     private void initFabAdd() {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onManageDependencyListener.onManageDependency(null);
+                onManageDependencyListener.onManageDependency(null,false);
             }
         });
     }
@@ -135,6 +142,18 @@ public class DependencyFragment extends Fragment implements DependencyListContra
         rvDependency.setAdapter(dependencyAdapter);
     }
 
+    private void showDeleteDialog(Dependency dependency){
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseDialogFragment.TITLE, getString(R.string.title_delete));
+        bundle.putString(BaseDialogFragment.MESSSAGE, getString(R.string.message_delete) + dependency.toString());
+        BaseDialogFragment dialogFragment = BaseDialogFragment.newInstance(bundle);
+        dialogFragment.setTargetFragment(DependencyFragment.this, REQUEST_CODE_DELETE);
+        dialogFragment.show(getFragmentManager(), BaseDialogFragment.TAG);
+
+        deleted = dependency;
+
+    }
+
     private void initDependencyAdapterListener(final OnManageDependencyListener onManageDependencyListener) {
 
         onManageDependencyAdapterListener = new DependencyAdapter.OnManageDependencyListener() {
@@ -149,7 +168,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
             @Override
             public void onUpdateDependency(Dependency dependency) {
                 Toast.makeText(getActivity(), "Click en : " + dependency.toString(), Toast.LENGTH_SHORT).show();
-                onManageDependencyListener.onManageDependency(dependency);
+                onManageDependencyListener.onManageDependency(dependency, true);
             }
             /**
              * Este método muestra un cuadro de dialogo pidiendo la confirmación del borrado de la dependencia
@@ -158,14 +177,26 @@ public class DependencyFragment extends Fragment implements DependencyListContra
             @Override
             public void onDeleteDependency(Dependency dependency) {
                 Toast.makeText(getActivity(), "Intento de borrado en la dependencia :" + dependency.getName(), Toast.LENGTH_SHORT).show();
+                showDeleteDialog(dependency);
             }
         };
 
     }
+    private void dependencyDeleted() {
+        presenter.delete(deleted);
+    }
 
     //region IMPLEMENTACIÓN DE INTERFACES
+    // BASE DIALOG INTERFACE
+    @Override
+    public void onFinishDialog() {
+        dependencyDeleted();
+    }
 
 
+
+
+    // PRESENTER
     @Override
     public void showLoadProgress() {
         animationNodata.setVisibility(View.INVISIBLE);
@@ -185,6 +216,8 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void showData(List<Dependency> dependencyList) {
         animationNodata.setVisibility(View.INVISIBLE);
+        dependencyAdapter.clear();
+        dependencyAdapter.load(dependencyList);
     }
 
     @Override
@@ -193,7 +226,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     }
 
     @Override
-    public void showError(String error) {
+    public void showError(int error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
     }
 

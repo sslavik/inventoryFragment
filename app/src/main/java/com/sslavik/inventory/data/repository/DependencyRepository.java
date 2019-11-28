@@ -1,9 +1,11 @@
 package com.sslavik.inventory.data.repository;
 
+import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.model.Dependency;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class DependencyRepository {
     // CAMPOS
@@ -59,15 +61,34 @@ public class DependencyRepository {
 
     }
 
-    public void add(Dependency dependency){
-
+    public boolean add(Dependency dependency){
+        if(!listDependency.contains(dependency)) {
+            listDependency.add(dependency);
+            return true;
+        }
+        else
+            return false;
     }
 
-    public void edit(Dependency dependency){
-
+    public boolean edit(Dependency dependency){
+        for(Dependency d : listDependency){
+            if(d.equals(dependency)){
+                d.setName(dependency.getName());
+                d.setDescription(dependency.getDescription());
+                d.setInventory(dependency.getInventory());
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void delete(Dependency dependency){
-
+    public boolean delete(Dependency dependency){
+        for(int i = 0; i < listDependency.size(); i++){
+            if(listDependency.get(i).equals(dependency)){
+                listDependency.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -16,6 +16,6 @@ public interface DependencyListContract {
 
     interface Presenter{
         void delete(Dependency dependency);
-        List<Dependency> load() throws ExecutionException, InterruptedException;
+        void load();
     }
 }
