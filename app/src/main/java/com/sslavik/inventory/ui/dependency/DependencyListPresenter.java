@@ -7,6 +7,7 @@ import com.sslavik.inventory.data.repository.DependencyRepository;
 
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DependencyListPresenter implements DependencyListContract.Presenter{
 
@@ -23,12 +24,15 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
     }
 
     @Override
-    public void load() {
+    public List<Dependency> load() throws ExecutionException, InterruptedException {
+        // DependencyList
+        List<Dependency> dependencies;
+
         // Obtenemos el Fragment
         DependencyFragment dependencyFragment = (DependencyFragment)view;
 
         // SACAMOS LOS DATOS DEL REPOSITORY
-        new AsyncTask<Void,Void, List<Dependency>>() {
+        dependencies = new AsyncTask<Void,Void, List<Dependency>>() {
 
             @Override
             protected void onPreExecute() {
@@ -39,7 +43,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
             @Override
             protected List<Dependency> doInBackground (Void...voids){
                 try{
-                    Thread.sleep(3000);
+                    Thread.sleep(0);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 }
@@ -60,7 +64,9 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
                 else
                     view.showData(dependencyList);
             }
-        }.execute();
+        }.execute().get();
+
+        return dependencies;
 
     }
 

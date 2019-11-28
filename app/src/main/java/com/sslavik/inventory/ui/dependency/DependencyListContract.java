@@ -4,6 +4,7 @@ import com.sslavik.inventory.data.model.Dependency;
 import com.sslavik.inventory.ui.base.BaseView;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface DependencyListContract {
     interface View extends BaseView<Presenter> {
@@ -15,6 +16,6 @@ public interface DependencyListContract {
 
     interface Presenter{
         void delete(Dependency dependency);
-        void load();
+        List<Dependency> load() throws ExecutionException, InterruptedException;
     }
 }

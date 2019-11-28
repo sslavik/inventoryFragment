@@ -102,7 +102,11 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void onStart() {
         super.onStart();
-        presenter.load();
+        try {
+            dependencyAdapter.load(presenter.load());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void initFabAdd() {
@@ -190,7 +194,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
 
     @Override
     public void showError(String error) {
-
+        Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
     }
 
     //endregion
