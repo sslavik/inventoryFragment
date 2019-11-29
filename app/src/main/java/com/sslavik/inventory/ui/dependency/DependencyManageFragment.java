@@ -30,7 +30,6 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
 
     // DELEGADO
     private DependencyManageContract.Presenter dependencyManagePresenter;
-    private DependencyFragment.OnManageDependencyListener onManageDependencyListener;
 
     // CAMPOS
     public static final String TAG = "DependencyManageFragment";

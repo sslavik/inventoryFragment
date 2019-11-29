@@ -94,4 +94,14 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
         listDependency.addAll(dependencyList);
         notifyDataSetChanged();
     }
+
+    public void add(Dependency dependency){
+        listDependency.add(dependency);
+        notifyDataSetChanged();
+    }
+
+    public void delete(Dependency dependency){
+        listDependency.remove(dependency);
+        notifyDataSetChanged();
+    }
 }

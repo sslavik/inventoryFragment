@@ -24,6 +24,17 @@
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_load"
+        android:layout_width="@dimen/loadAnimation"
+        android:layout_height="@dimen/loadAnimation"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+
+        app:lottie_rawRes="@raw/load_animation"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"

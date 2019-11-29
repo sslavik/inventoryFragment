@@ -18,5 +18,6 @@
     <dimen name="fabElevation">6dp</dimen>
     <dimen name="fabMargin">16dp</dimen>
     <dimen name="spinner">16dp</dimen>
+    <dimen name="loadAnimation">100dp</dimen>
 
 </resources>

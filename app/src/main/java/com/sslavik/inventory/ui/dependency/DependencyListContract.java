@@ -12,10 +12,12 @@ public interface DependencyListContract {
         void hideLoadProgress();
         void showNoData();
         void showData(List<Dependency> dependencyList);
+        void undoDelete(Dependency dependency);
     }
 
     interface Presenter{
         void delete(Dependency dependency);
         void load();
+        void add(Dependency dependency);
     }
 }

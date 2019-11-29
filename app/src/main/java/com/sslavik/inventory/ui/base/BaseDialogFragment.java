@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,18 +13,20 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.sslavik.inventory.R;
+import com.sslavik.inventory.ui.dependency.DependencyFragment;
 
 public class BaseDialogFragment extends DialogFragment {
-
-    public static final String TITLE = "title";
-    public static final String MESSSAGE = "message";
-    public static final String TAG = "dialog" ;
 
     // Listener del DIALOGFRAGMENT
     public interface OnFinishDialog{
         // CUANDO SE PULSA ACEPTAR
         void onFinishDialog();
     }
+
+    public static final String TITLE = "title";
+    public static final String MESSSAGE = "message";
+    public static final String TAG = "dialog" ;
+
 
     public static BaseDialogFragment newInstance (Bundle bundle){
 
@@ -57,7 +60,8 @@ public class BaseDialogFragment extends DialogFragment {
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                OnFinishDialog onFinishDialogListener = (OnFinishDialog) getTargetFragment();
+                onFinishDialogListener.onFinishDialog();
             }
         });
 

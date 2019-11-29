@@ -2,6 +2,7 @@ package com.sslavik.inventory.ui.dependency;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,10 +23,9 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dependency);
-
         showListFragmets();
-
     }
+
 
 
     /**

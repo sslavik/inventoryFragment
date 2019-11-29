@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.sslavik.inventory.R;
 import com.sslavik.inventory.adapter.DependencyAdapter;
 import com.sslavik.inventory.data.model.Dependency;
@@ -47,6 +48,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     private FloatingActionButton fabAdd;
     private OnManageDependencyListener onManageDependencyListener;
     private LottieAnimationView animationNodata;
+    private LottieAnimationView animationLoad;
     Dependency deleted;
 
 
@@ -82,8 +84,9 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // ANIMATIONS
         animationNodata = view.findViewById(R.id.animation_nodata);
+        animationLoad = view.findViewById(R.id.animation_load);
         // PASADO DEL OnCreate del Acitvity
         // INSTANCIAMOS FloatingButton
         fabAdd = view.findViewById(R.id.fabAdd);
@@ -145,7 +148,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     private void showDeleteDialog(Dependency dependency){
         Bundle bundle = new Bundle();
         bundle.putString(BaseDialogFragment.TITLE, getString(R.string.title_delete));
-        bundle.putString(BaseDialogFragment.MESSSAGE, getString(R.string.message_delete) + dependency.toString());
+        bundle.putString(BaseDialogFragment.MESSSAGE, getString(R.string.message_delete) + dependency.getShortName());
         BaseDialogFragment dialogFragment = BaseDialogFragment.newInstance(bundle);
         dialogFragment.setTargetFragment(DependencyFragment.this, REQUEST_CODE_DELETE);
         dialogFragment.show(getFragmentManager(), BaseDialogFragment.TAG);
@@ -190,7 +193,20 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     // BASE DIALOG INTERFACE
     @Override
     public void onFinishDialog() {
+        // BORRAMOS EN EL REPOSITORY
         dependencyDeleted();
+        // BORRAMOS EN EL ADAPTADOR
+        dependencyAdapter.delete(deleted);
+        presenter.load();
+
+        Snackbar.make(getView(),getString(R.string.snkBarMessageDeleted) + deleted.getShortName(),Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.snkBarUndo), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        undoDelete(deleted);
+                    }
+                })
+                .setActionTextColor(getResources().getColor(R.color.secondaryLightColor)).show();
     }
 
 
@@ -200,12 +216,16 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void showLoadProgress() {
         animationNodata.setVisibility(View.INVISIBLE);
-
+        rvDependency.setVisibility(View.INVISIBLE);
+        animationLoad.setFrame(0);
+        animationLoad.setSpeed(2.6f);
+        animationLoad.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadProgress() {
-
+        rvDependency.setVisibility(View.VISIBLE);
+        animationLoad.setVisibility(View.GONE);
     }
 
     @Override
@@ -218,6 +238,13 @@ public class DependencyFragment extends Fragment implements DependencyListContra
         animationNodata.setVisibility(View.INVISIBLE);
         dependencyAdapter.clear();
         dependencyAdapter.load(dependencyList);
+    }
+
+    @Override
+    public void undoDelete(Dependency dependency) {
+        dependencyAdapter.add(dependency);
+        presenter.add(dependency);
+        presenter.load();
     }
 
     @Override

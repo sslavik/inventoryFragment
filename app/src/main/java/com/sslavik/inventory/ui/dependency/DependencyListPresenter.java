@@ -21,9 +21,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
     @Override
     public void delete(Dependency dependency) {
         // 1 REALIZAMOS LA OPERACIÓN DEL REPOSITORIO y COMPROBAMSO ELRESULTADO
-        if(DependencyRepository.getInstance().delete(dependency)){
-
-        }
+        DependencyRepository.getInstance().delete(dependency);
     }
 
     @Override
@@ -64,6 +62,11 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
             }
         }.execute();
 
+    }
+
+    @Override
+    public void add(Dependency dependency) {
+        DependencyRepository.getInstance().add(dependency);
     }
 
     private class LoadDataTask extends  AsyncTask<Void,Void, List<Dependency>>{

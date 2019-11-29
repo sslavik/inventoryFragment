@@ -42,4 +42,6 @@
     <string name="btnOk">Accept</string>
     <string name="title_delete">Delete</string>
     <string name="message_delete">You want to delete :</string>
+    <string name="snkBarUndo">Undo</string>
+    <string name="snkBarMessageDeleted">Deleted :</string>
 </resources>
