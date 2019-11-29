@@ -61,6 +61,7 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -92,6 +93,8 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
 
         initializeFab();
     }
+
+
 
     @Override
     public void onAttach(Context context) {

@@ -72,6 +72,11 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     }
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Nullable
     @Override
@@ -196,7 +201,6 @@ public class DependencyFragment extends Fragment implements DependencyListContra
         // BORRAMOS EN EL REPOSITORY
         dependencyDeleted();
         // BORRAMOS EN EL ADAPTADOR
-        dependencyAdapter.delete(deleted);
         presenter.load();
 
         Snackbar.make(getView(),getString(R.string.snkBarMessageDeleted) + deleted.getShortName(),Snackbar.LENGTH_LONG)
@@ -242,9 +246,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
 
     @Override
     public void undoDelete(Dependency dependency) {
-        dependencyAdapter.add(dependency);
-        presenter.add(dependency);
-        presenter.load();
+        onSuccessUndo(dependency);
     }
 
     @Override
@@ -255,6 +257,18 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void showError(int error) {
         Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSuccessDeleted() {
+        dependencyAdapter.delete(deleted);
+    }
+
+    @Override
+    public void onSuccessUndo(Dependency dependency) {
+        dependencyAdapter.add(dependency);
+        presenter.add(dependency);
+        presenter.load();
     }
 
     //endregion

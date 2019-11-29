@@ -39,9 +39,9 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
             dependencyFragment = (DependencyFragment) DependencyFragment.newInstance(null);
             fragmentManager.beginTransaction().add(android.R.id.content, dependencyFragment, DependencyFragment.TAG).commit();
             // Creamos el presentador para el DependencyList
-            dependencyListPresenter = new DependencyListPresenter(dependencyFragment);
-            dependencyFragment.setPresenter(dependencyListPresenter);
         }
+        dependencyListPresenter = new DependencyListPresenter(dependencyFragment);
+        dependencyFragment.setPresenter(dependencyListPresenter);
     }
 
 
@@ -55,11 +55,12 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
             } else {
                 dependencyManageFragment = DependencyManageFragment.newInstance(bundle);
             }
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(android.R.id.content, dependencyManageFragment, DependencyManageFragment.TAG);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(android.R.id.content, dependencyManageFragment, DependencyManageFragment.TAG);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+
         dependencyManagePresenter = new DependencyManagePresenter(dependencyManageFragment);
         dependencyManageFragment.setPresenter(dependencyManagePresenter);
 

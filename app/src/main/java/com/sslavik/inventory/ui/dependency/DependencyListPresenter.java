@@ -22,6 +22,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
     public void delete(Dependency dependency) {
         // 1 REALIZAMOS LA OPERACIÓN DEL REPOSITORIO y COMPROBAMSO ELRESULTADO
         DependencyRepository.getInstance().delete(dependency);
+        view.onSuccessDeleted();
     }
 
     @Override

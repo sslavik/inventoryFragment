@@ -13,6 +13,8 @@ public interface DependencyListContract {
         void showNoData();
         void showData(List<Dependency> dependencyList);
         void undoDelete(Dependency dependency);
+        void onSuccessDeleted();
+        void onSuccessUndo(Dependency dependency);
     }
 
     interface Presenter{
