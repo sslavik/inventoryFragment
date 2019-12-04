@@ -1,6 +1,11 @@
 package com.sslavik.inventory.ui.dependency;
 
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.ui.base.BaseActivity;
 
-public class DependencyActivity extends AppCompatActivity implements DependencyFragment.OnManageDependencyListener {
+public class DependencyActivity extends BaseActivity implements DependencyFragment.OnManageDependencyListener {
 
     // FRAGMENTS IMPLEMENTADOS
     private DependencyFragment dependencyFragment;
@@ -67,6 +73,13 @@ public class DependencyActivity extends AppCompatActivity implements DependencyF
 
     }
 
+
+    // OVERRIDE METODS FROM ACTIVITY
+
+
+
+
+    // OVERRIDE METHODS FROM LISTENER
     @Override
     public void onManageDependency(Dependency dependency, boolean edit) {
         Bundle bundle = new Bundle();

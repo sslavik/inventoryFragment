@@ -18,6 +18,9 @@ import com.sslavik.inventory.ui.base.BaseDialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -73,9 +76,32 @@ public class DependencyFragment extends Fragment implements DependencyListContra
 
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_dependency_list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_orderbyname:
+                Toast.makeText(getActivity(), "Se ha pulsado ordenar por nombre", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
+        // SE DEBE INDICIAR LA SIGUIENTE LLAMADA PARA QUE LLAME A LOS METODOS QUE CREAN EL MENU
+        setHasOptionsMenu(true);
     }
 
     @Nullable

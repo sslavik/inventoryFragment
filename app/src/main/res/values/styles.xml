@@ -11,6 +11,9 @@
     <style name="CustomToolBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@color/primaryTextColor</item>
     </style>
+    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
     <style name="AppTheme.SpalshTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
