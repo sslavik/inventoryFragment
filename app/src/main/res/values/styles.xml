@@ -8,16 +8,20 @@
         <item name="colorAccent">@color/primaryTextColor</item>
         <item name="toolbarStyle">@style/CustomToolBarStyle</item>
     </style>
+
     <style name="CustomToolBarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextColor">@color/primaryTextColor</item>
     </style>
+
     <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
 
     </style>
+
     <style name="AppTheme.SpalshTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.DashTheme">
 
     </style>
@@ -41,4 +45,13 @@
         <item name="android:buttonTint">@color/primaryDarkColor</item>
         <item name="android:checked">true</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

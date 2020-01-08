@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.sslavik.inventory.R;
+import com.sslavik.inventory.ui.base.BaseActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

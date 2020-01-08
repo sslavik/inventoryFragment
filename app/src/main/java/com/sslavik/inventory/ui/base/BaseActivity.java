@@ -1,5 +1,6 @@
 package com.sslavik.inventory.ui.base;
 
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -7,10 +8,26 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
 import com.sslavik.inventory.R;
 
 public class BaseActivity extends AppCompatActivity {
+
+    //CAMPOS
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base);
+
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navigationView);
+
+    }
 
     // Instancia del menu
     @Override
