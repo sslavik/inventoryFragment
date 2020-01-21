@@ -1,6 +1,8 @@
 package com.sslavik.inventory.data.model;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
 
     /*
     * Nombre
@@ -25,5 +27,46 @@ public class Section {
         this.imageSection = imageSection;
     }
 
-    //
+    // GETTERS AND SETTERS
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public Dependency getDependency() {
+        return dependency;
+    }
+
+    public void setDependency(Dependency dependency) {
+        this.dependency = dependency;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getImageSection() {
+        return imageSection;
+    }
+
+    public void setImageSection(int imageSection) {
+        this.imageSection = imageSection;
+    }
 }

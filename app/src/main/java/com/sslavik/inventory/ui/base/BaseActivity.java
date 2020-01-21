@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,11 +23,18 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        //setContentView(R.layout.activity_base);
+    }
 
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
+    @Override
+    public void setContentView(int layoutResID) {
 
+        drawerLayout = getLayoutInflater().inflate(R.layout.activity_base, null).findViewById(R.id.drawerLayout);
+        navigationView =   getLayoutInflater().inflate(R.layout.activity_base, null).findViewById(R.id.navigationView);
+        FrameLayout activityContainer =  drawerLayout.findViewById(R.id.activity_content);
+        getLayoutInflater().inflate(layoutResID, activityContainer, true);
+
+        super.setContentView(drawerLayout);
     }
 
     // Instancia del menu

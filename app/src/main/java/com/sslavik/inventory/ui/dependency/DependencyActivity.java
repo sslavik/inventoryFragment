@@ -33,7 +33,6 @@ public class DependencyActivity extends BaseActivity implements DependencyFragme
     }
 
 
-
     /**
      * Inicializa el contexto del fragmento
      */
@@ -43,9 +42,9 @@ public class DependencyActivity extends BaseActivity implements DependencyFragme
 
         if(dependencyFragment == null){
             dependencyFragment = (DependencyFragment) DependencyFragment.newInstance(null);
-            fragmentManager.beginTransaction().add(android.R.id.content, dependencyFragment, DependencyFragment.TAG).commit();
-            // Creamos el presentador para el DependencyList
         }
+        fragmentManager.beginTransaction().replace(R.id.contentDependency, dependencyFragment, DependencyFragment.TAG).commit();
+        // Creamos el presentador para el DependencyList
         dependencyListPresenter = new DependencyListPresenter(dependencyFragment);
         dependencyFragment.setPresenter(dependencyListPresenter);
     }

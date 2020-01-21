@@ -5,11 +5,15 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
+@Entity
 public class Dependency implements Parcelable {
     private String name;
+    @PrimaryKey
     private String shortName;
     private String description;
     private String inventory;

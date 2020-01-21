@@ -98,6 +98,7 @@ public class DependencyFragment extends Fragment implements DependencyListContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setRetainInstance(true);
 
         // SE DEBE INDICIAR LA SIGUIENTE LLAMADA PARA QUE LLAME A LOS METODOS QUE CREAN EL MENU
