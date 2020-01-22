@@ -6,16 +6,21 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
 @Entity
 public class Dependency implements Parcelable {
+    @NonNull
     private String name;
     @PrimaryKey
+    @NonNull
     private String shortName;
+    @NonNull
     private String description;
+    @NonNull
     private String inventory;
     private String image;
 
@@ -29,7 +34,7 @@ public class Dependency implements Parcelable {
         this.image = image;
     }
 
-
+    @Ignore
     protected Dependency(Parcel in) {
         name = in.readString();
         shortName = in.readString();
@@ -50,6 +55,7 @@ public class Dependency implements Parcelable {
         }
     };
 
+    @Ignore
     public Dependency() {
 
     }

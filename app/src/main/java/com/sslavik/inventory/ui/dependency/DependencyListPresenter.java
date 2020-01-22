@@ -6,6 +6,7 @@ import com.sslavik.inventory.data.model.Dependency;
 import com.sslavik.inventory.data.repository.DependencyRepository;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -39,12 +40,14 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
             @Override
             protected List<Dependency> doInBackground (Void...voids){
-                try{
-                    Thread.sleep(1000);
-                } catch (InterruptedException e){
+                try {
+                    return DependencyRepository.getInstance().getList();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                return DependencyRepository.getInstance().getList();
+                return new ArrayList<Dependency>();
             }
 
             @Override

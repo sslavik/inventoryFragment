@@ -61,7 +61,7 @@ public class DependencyActivity extends BaseActivity implements DependencyFragme
                 dependencyManageFragment = DependencyManageFragment.newInstance(bundle);
             }
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(android.R.id.content, dependencyManageFragment, DependencyManageFragment.TAG);
+            fragmentTransaction.replace(R.id.contentDependency, dependencyManageFragment, DependencyManageFragment.TAG);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }

@@ -1,10 +1,16 @@
 package com.sslavik.inventory.data.repository;
 
+import android.os.AsyncTask;
+
+import com.sslavik.inventory.InventoryApplication;
 import com.sslavik.inventory.R;
+import com.sslavik.inventory.data.InventoryDatabase;
+import com.sslavik.inventory.data.dao.DependencyDao;
 import com.sslavik.inventory.data.model.Dependency;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class DependencyRepository {
@@ -12,6 +18,8 @@ public class DependencyRepository {
     private List<Dependency> listDependency;
     // INICIALIZAMOS EL SINGLETONE
     private volatile static DependencyRepository repository;
+    // DAO
+    DependencyDao dependencyDao;
 
     public static DependencyRepository getInstance() {
         return repository;
@@ -25,6 +33,8 @@ public class DependencyRepository {
 
     // CONSTRUCTOR
     private DependencyRepository(){
+        // INICIAMOS EL DAO
+        dependencyDao = InventoryDatabase.getDatabase().dependencyDao();
         listDependency = new ArrayList<>();
         initialiceListOfDependency();
 
@@ -35,42 +45,34 @@ public class DependencyRepository {
      */
     private void initialiceListOfDependency() {
         // Añadimos dependencias a la lista
-        listDependency.add(new Dependency("2º Ciclo Formativo Grado Superior", "2CFGS", "Aula informática","","https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Superior", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("2º Ciclo Formativo Grado Medio", "2CFGM", "Aula informática","", "https://images.com/achis.png"));
-        /*listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
-        listDependency.add(new Dependency("1º Ciclo Formativo Grado Medio", "1CFGS", "Aula informática","", "https://images.com/achis.png"));*/
+        add(new Dependency("2º Ciclo Formativo Grado Superior", "2CFGS", "Aula informática","","https://images.com/achis.png"));
+        add(new Dependency("1º Ciclo Formativo Grado Superior", "1CFGS", "Aula informática","", "https://images.com/achis.png"));
+        add(new Dependency("2º Ciclo Formativo Grado Medio", "2CFGM", "Aula informática","", "https://images.com/achis.png"));
     }
 
-    public List<Dependency> getList() {
+    public List<Dependency> getList() throws ExecutionException, InterruptedException {
 
-        return listDependency;
-
+        return new AsyncTask<Void, Void, List<Dependency>>() {
+            @Override
+            protected List<Dependency> doInBackground(Void... voids) {
+                return dependencyDao.getAll();
+            }
+        }.doInBackground();
     }
 
-    public boolean add(Dependency dependency){
+    public void add(Dependency dependency){
+        // DATABASE
+        InventoryDatabase.databaseWriteExecutor.execute(() -> dependencyDao.insert(dependency));
+
         if(!listDependency.contains(dependency)) {
             listDependency.add(dependency);
-            return true;
         }
-        else
-            return false;
     }
 
     public boolean edit(Dependency dependency){
+        // DATABASE
+        InventoryDatabase.databaseWriteExecutor.execute(() -> dependencyDao.update(dependency));
+
         for(Dependency d : listDependency){
             if(d.equals(dependency)){
                 d.setName(dependency.getName());
@@ -83,12 +85,24 @@ public class DependencyRepository {
     }
 
     public boolean delete(Dependency dependency){
-        for(int i = 0; i < listDependency.size(); i++){
+        // DATABASE
+        InventoryDatabase.databaseWriteExecutor.execute(() -> dependencyDao.delete(dependency));
+
+
+        for(int i = 0; i < listDependency.size(); i-=-1){
             if(listDependency.get(i).equals(dependency)){
                 listDependency.remove(i);
                 return true;
             }
         }
         return false;
+    }
+
+    private class QueryAsyncClass extends AsyncTask<Void,Void,List<Dependency>>{
+
+        @Override
+        protected List<Dependency> doInBackground(Void... voids) {
+            return dependencyDao.getAll();
+        }
     }
 }
