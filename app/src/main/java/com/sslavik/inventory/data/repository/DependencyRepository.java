@@ -7,6 +7,7 @@ import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.InventoryDatabase;
 import com.sslavik.inventory.data.dao.DependencyDao;
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.ui.dependency.DependencyListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ import java.util.concurrent.ExecutionException;
 public class DependencyRepository {
     // CAMPOS
     private List<Dependency> listDependency;
+
+    // DELEGADO
+    DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository;
+
     // INICIALIZAMOS EL SINGLETONE
     private volatile static DependencyRepository repository;
     // DAO
@@ -50,14 +55,10 @@ public class DependencyRepository {
         add(new Dependency("2º Ciclo Formativo Grado Medio", "2CFGM", "Aula informática","", "https://images.com/achis.png"));
     }
 
-    public List<Dependency> getList() throws ExecutionException, InterruptedException {
+    public void getList(DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository)  {
 
-        return new AsyncTask<Void, Void, List<Dependency>>() {
-            @Override
-            protected List<Dependency> doInBackground(Void... voids) {
-                return dependencyDao.getAll();
-            }
-        }.doInBackground();
+        this.onLoadDependencyRepository = onLoadDependencyRepository;
+        new QueryAsyncClass(onLoadDependencyRepository).execute();
     }
 
     public void add(Dependency dependency){
@@ -100,9 +101,27 @@ public class DependencyRepository {
 
     private class QueryAsyncClass extends AsyncTask<Void,Void,List<Dependency>>{
 
+        DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository;
+
+        public QueryAsyncClass(DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository) {
+            this.onLoadDependencyRepository = onLoadDependencyRepository;
+        }
+
         @Override
         protected List<Dependency> doInBackground(Void... voids) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return dependencyDao.getAll();
+        }
+
+
+        @Override
+        protected void onPostExecute(List<Dependency> dependencyList) {
+            super.onPostExecute(dependencyList);
+            onLoadDependencyRepository.onSuccessLoadList(dependencyList);
         }
     }
 }

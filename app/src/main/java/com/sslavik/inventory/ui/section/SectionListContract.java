@@ -1,6 +1,7 @@
 package com.sslavik.inventory.ui.section;
 
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.data.model.Section;
 import com.sslavik.inventory.ui.base.BaseView;
 
 import java.util.List;
@@ -10,15 +11,15 @@ public interface SectionListContract {
         void showLoadProgress();
         void hideLoadProgress();
         void showNoData();
-        void showData(List<Dependency> dependencyList);
-        void undoDelete(Dependency dependency);
+        void showData(List<Section> sectionList);
+        void undoDelete(Section section);
         void onSuccessDeleted();
-        void onSuccessUndo(Dependency dependency);
+        void onSuccessUndo(Section section);
     }
 
     interface Presenter{
-        void delete(Dependency dependency);
+        void delete(Section section);
         void load();
-        void add(Dependency dependency);
+        void add(Section section);
     }
 }

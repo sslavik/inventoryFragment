@@ -12,11 +12,18 @@ import java.util.concurrent.ExecutionException;
 
 public class DependencyListPresenter implements DependencyListContract.Presenter{
 
+    // INTERFAZ
+    public interface onLoadDependencyRepository{
+        void onSuccessLoadList(List<Dependency> dependencyList);
+    }
+
     // DELEGADO
     DependencyListContract.View view;
+    onLoadDependencyRepository onLoadDependencyRepository;
 
     public DependencyListPresenter (DependencyListContract.View view){
         this.view = view;
+        initDelegates();
     }
 
     @Override
@@ -30,6 +37,7 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
     public void load() {
 
         // SACAMOS LOS DATOS DEL REPOSITORY
+        /*
         new AsyncTask<Void,Void, List<Dependency>>() {
 
             @Override
@@ -66,7 +74,12 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
             }
         }.execute();
 
+         */
+        view.showLoadProgress();
+        DependencyRepository.getInstance().getList(onLoadDependencyRepository);
+
     }
+
 
     @Override
     public void add(Dependency dependency) {
@@ -80,4 +93,22 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
             return null;
         }
     }
+
+    // METODOS PROPIOS
+
+
+    private void initDelegates() {
+        onLoadDependencyRepository = new onLoadDependencyRepository() {
+
+            @Override
+            public void onSuccessLoadList(List<Dependency> dependencyList) {
+                view.hideLoadProgress();
+                if(dependencyList.isEmpty())
+                    view.showNoData();
+                else
+                    view.showData(dependencyList);
+            }
+        };
+    }
+
 }

@@ -33,12 +33,30 @@ public class SectionRepository {
         sectionList.add(new Section("Section 3", "s3", null, "Section 3 Description Example", 0));
     }
 
-    static Boolean add(Section section){
+    public Boolean add(Section section){
         if(sectionList.add(section))
             return true;
         return false;
     }
 
+    public Boolean edit(Section section){
+        for (int i = 0; i < sectionList.size() ; i++) {
+            if(sectionList.get(i).equals(section)) {
+                sectionList.set(i, section);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean delete(Section section){
+        if(sectionList.remove(section))
+            return true;
+        return false;
+    }
 
 
+    public List<Section> getList() {
+        return sectionList;
+    }
 }
