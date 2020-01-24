@@ -12,7 +12,7 @@ import com.sslavik.inventory.data.model.Dependency;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Dependency.class}, version = 3)
+@Database(entities = {Dependency.class}, version = 4)
 public abstract class InventoryDatabase extends RoomDatabase {
 
     //DAOS

@@ -1,7 +1,9 @@
 package com.sslavik.inventory.ui.dependency;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.sslavik.inventory.R;
 import com.sslavik.inventory.data.model.Dependency;
 import com.sslavik.inventory.data.repository.DependencyRepository;
 
@@ -76,14 +78,20 @@ public class DependencyListPresenter implements DependencyListContract.Presenter
 
          */
         view.showLoadProgress();
-        DependencyRepository.getInstance().getList(onLoadDependencyRepository);
+        List<Dependency> dependencyList = DependencyRepository.getInstance().getList(onLoadDependencyRepository);
+        view.hideLoadProgress();
+        if(dependencyList.isEmpty())
+            view.showNoData();
+        else
+            view.showData(dependencyList);
 
     }
 
-
+    // ESTE ADD HACE LA FUNCION DE UNDO CUANDO SE BORRA UN ELEMENTO
     @Override
     public void add(Dependency dependency) {
         DependencyRepository.getInstance().add(dependency);
+
     }
 
     private class LoadDataTask extends  AsyncTask<Void,Void, List<Dependency>>{

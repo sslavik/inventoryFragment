@@ -1,6 +1,9 @@
 package com.sslavik.inventory.data.repository;
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import androidx.room.OnConflictStrategy;
 
 import com.sslavik.inventory.InventoryApplication;
 import com.sslavik.inventory.R;
@@ -55,19 +58,38 @@ public class DependencyRepository {
         add(new Dependency("2º Ciclo Formativo Grado Medio", "2CFGM", "Aula informática","", "https://images.com/achis.png"));
     }
 
-    public void getList(DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository)  {
+    public List<Dependency> getList(DependencyListPresenter.onLoadDependencyRepository onLoadDependencyRepository)  {
 
-        this.onLoadDependencyRepository = onLoadDependencyRepository;
-        new QueryAsyncClass(onLoadDependencyRepository).execute();
+        // CON HANDLER . ADEMAS DE QUITAR EL RETURN LIST<DEPENDENCY>
+        //this.onLoadDependencyRepository = onLoadDependencyRepository;
+        //QueryAsyncClass(onLoadDependencyRepository).execute();
+        try {
+            return InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDao.getAll()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public void add(Dependency dependency){
+    public long add(Dependency dependency){
         // DATABASE
-        InventoryDatabase.databaseWriteExecutor.execute(() -> dependencyDao.insert(dependency));
+        //InventoryDatabase.databaseWriteExecutor.execute(() -> dependencyDao.insert(dependency));
+        try {
+            return new InsertAsyncClass().execute(dependency).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         if(!listDependency.contains(dependency)) {
             listDependency.add(dependency);
         }
+
+        return -1;
+
     }
 
     public boolean edit(Dependency dependency){
@@ -97,6 +119,20 @@ public class DependencyRepository {
             }
         }
         return false;
+    }
+
+    private class InsertAsyncClass extends AsyncTask<Dependency,Void,Long>{
+
+        @Override
+        protected Long doInBackground(Dependency... dependencies) {
+
+            Long result = dependencyDao.insert(dependencies[0]);
+            // CON ESTO PODEMOS GESTIONAR EL RESULTADO DE UNA INSECCION
+
+            Log.d("INSERT DEP DAO", result.toString());
+
+            return result;
+        }
     }
 
     private class QueryAsyncClass extends AsyncTask<Void,Void,List<Dependency>>{

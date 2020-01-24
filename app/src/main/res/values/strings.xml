@@ -67,4 +67,8 @@
     <string name="menu_sections">Sections</string>
     <string name="menu_product">Products</string>
     <string name="MenuActions">Actions Menu</string>
+    <string name="err_duplicate_dependency">ERROR: Dependency already exists in Dependencies</string>
+    <string name="channel_name">Inventorty</string>
+    <string name="channel_description">Channel por defecto Inventory</string>
+    <string name="tvDescription">Descripción</string>
 </resources>

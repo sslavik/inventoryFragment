@@ -16,8 +16,8 @@ public interface DependencyDao {
     @Query ("DELETE FROM dependency")
     void deleteAll();
 
-    @Insert (onConflict = OnConflictStrategy.REPLACE)
-    void insert(Dependency dependency);
+    @Insert (onConflict = OnConflictStrategy.IGNORE)
+    long insert(Dependency dependency);
 
     @Delete
     void delete(Dependency dependency);

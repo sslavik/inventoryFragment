@@ -1,21 +1,42 @@
 package com.sslavik.inventory.ui.section;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sslavik.inventory.R;
+import com.sslavik.inventory.adapter.SectionAdapter;
+import com.sslavik.inventory.data.model.Section;
 
-public class SectionFragment extends Fragment {
+import java.util.List;
 
+public class SectionFragment extends Fragment implements SectionListContract.View {
+
+
+    // FIELDS
+    RecyclerView rvSection;
+    FloatingActionButton fabAddSection;
+    SectionAdapter sectionAdapter;
+
+    // DELEGADOS
+
+    // FRAGMENT
+    SectionManageFragment sectionManagerFragment;
+
+    // PRESENTER
+
+
+    SectionListContract.Presenter presenter;
 
     public static SectionFragment newInstance(Bundle bundle) {
         SectionFragment fragment = new SectionFragment();
@@ -43,6 +64,20 @@ public class SectionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // INSTANCIATE VIEWS
+        rvSection = view.findViewById(R.id.rvSection);
+        fabAddSection = view.findViewById(R.id.fabAddSection);
+
+        // METHODS OF INIT
+        initAddFabSection();
+        initRvSection();
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.load();
     }
 
     @Override
@@ -53,5 +88,71 @@ public class SectionFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    // METODOS CREADOS
+
+
+    private void initRvSection() {
+
+        sectionAdapter = new SectionAdapter(getContext());
+        rvSection.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSection.setAdapter(sectionAdapter);
+    }
+
+    private void initAddFabSection() {
+        fabAddSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ABRIMOS EL MANAGER PARA CREAR UNA SECCION
+            }
+        });
+    }
+    // METODOS IMPLEMENTADOS
+
+
+    @Override
+    public void showLoadProgress() {
+
+    }
+
+    @Override
+    public void hideLoadProgress() {
+
+    }
+
+    @Override
+    public void showNoData() {
+
+    }
+
+    @Override
+    public void showData(List<Section> sectionList) {
+        sectionAdapter.load(sectionList);
+    }
+
+    @Override
+    public void undoDelete(Section section) {
+
+    }
+
+    @Override
+    public void onSuccessDeleted() {
+
+    }
+
+    @Override
+    public void onSuccessUndo(Section section) {
+
+    }
+
+    @Override
+    public void setPresenter(SectionListContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void showError(int error) {
+
     }
 }
