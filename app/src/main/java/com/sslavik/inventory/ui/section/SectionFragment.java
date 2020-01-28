@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sslavik.inventory.R;
@@ -20,7 +21,7 @@ import com.sslavik.inventory.data.model.Section;
 
 import java.util.List;
 
-public class SectionFragment extends Fragment implements SectionListContract.View {
+public class SectionFragment extends Fragment implements SectionListContract.View{
 
 
     // FIELDS
@@ -29,6 +30,7 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
     SectionAdapter sectionAdapter;
 
     // DELEGADOS
+    SectionAdapter.OnManageSection onManageSection;
 
     // FRAGMENT
     SectionManageFragment sectionManagerFragment;
@@ -95,9 +97,36 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
 
     private void initRvSection() {
 
-        sectionAdapter = new SectionAdapter(getContext());
+        initAdapterHandler();
+
+        sectionAdapter = new SectionAdapter(getContext(), onManageSection);
         rvSection.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSection.setAdapter(sectionAdapter);
+
+
+    }
+    // ADAPTER HANDLER IMPLEMENTATION
+
+    private void initAdapterHandler() {
+
+        onManageSection = new SectionAdapter.OnManageSection() {
+            @Override
+            public void OnManageSection(Section section) {
+                SectionManageFragment sectionManageFragment = (SectionManageFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentSectionManage);
+
+                if(sectionManageFragment == null){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("section", section);
+                    sectionManageFragment = SectionManageFragment.newInstance(bundle);
+                }
+            }
+
+            @Override
+            public void OnDeleteSection(Section section) {
+
+            }
+        };
+
     }
 
     private void initAddFabSection() {
@@ -155,4 +184,5 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
     public void showError(int error) {
 
     }
+
 }

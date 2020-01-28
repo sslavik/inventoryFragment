@@ -20,15 +20,24 @@ import java.util.zip.Inflater;
 public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHolder> {
 
     // INTERFAZ
+    public interface OnManageSection {
+        void OnManageSection(Section section);
+        void OnDeleteSection(Section section);
+    }
 
     // FIELDS
 
     List<Section> sectionList;
     Context context;
 
-    public SectionAdapter(Context context) {
+    // DELEGADOS
+
+    OnManageSection onManageSection;
+
+    public SectionAdapter(Context context, OnManageSection onManageSection) {
         this.sectionList = new ArrayList<>();
         this.context = context;
+        this.onManageSection = onManageSection;
     }
 
     @NonNull
@@ -45,6 +54,23 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
         holder.tvNameSection.setText(sectionList.get(position).getName());
         holder.mliIconoSection.setLetter(sectionList.get(position).getName());
 
+        // CLICK HANDLER
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onManageSection.OnManageSection(sectionList.get(position));
+            }
+        });
+
+        // LONG CLICK HANDLER
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onManageSection.OnDeleteSection(sectionList.get(position));
+                return true; // TRUE -> no se propaga
+            }
+        });
     }
 
 
@@ -63,6 +89,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
             super(itemView);
             mliIconoSection = itemView.findViewById(R.id.mliIconoSection);
             tvNameSection = itemView.findViewById(R.id.tvNameSection);
+
         }
     }
 
