@@ -179,12 +179,13 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
 
         // Create an explicit intent for an Activity in your app
 
+        // NOTIFICACION
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), InventoryApplication.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_inventory_vector)
+                .setSmallIcon(R.drawable.inventory)
                 .setContentTitle("My notification")
                 .setContentText("Hello World!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

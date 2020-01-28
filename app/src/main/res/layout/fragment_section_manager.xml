@@ -50,30 +50,29 @@
             app:layout_constraintTop_toBottomOf="@+id/tvLongName" />
 
         <TextView
-            android:id="@+id/tvInventoryManager"
+            android:id="@+id/tvDependenvy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/tvInventory"
+            android:text="@string/tvDependency"
             app:layout_constraintStart_toStartOf="@+id/edLongName"
             app:layout_constraintTop_toBottomOf="@+id/edLongName" />
 
         <Spinner
-            android:id="@+id/spInventory"
+            android:id="@+id/spDependency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spinner"
-            android:entries="@array/spInventory"
-            app:layout_constraintTop_toBottomOf="@+id/tvInventoryManager" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDependenvy" />
 
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/tvInventory"
-            app:layout_constraintStart_toStartOf="@+id/spInventory"
-            app:layout_constraintTop_toBottomOf="@+id/spInventory" />
+            android:text="@string/tvDescription"
+            app:layout_constraintStart_toStartOf="@+id/spDependency"
+            app:layout_constraintTop_toBottomOf="@+id/spDependency" />
 
         <EditText
             android:id="@+id/edDescription"
@@ -88,7 +87,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabManageDependency"
+        android:id="@+id/fabManageSection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

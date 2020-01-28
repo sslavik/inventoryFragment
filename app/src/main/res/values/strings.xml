@@ -71,4 +71,6 @@
     <string name="channel_name">Inventorty</string>
     <string name="channel_description">Channel por defecto Inventory</string>
     <string name="tvDescription">Descripción</string>
+    <string name="tvDependency">Dependency</string>
+    <string name="err_not_correct_section">ERROR: Not correct initialization of section</string>
 </resources>

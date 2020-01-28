@@ -12,6 +12,7 @@ public class SectionManagePresenter implements SectionManageContract.Presenter {
         this.view = view;
     }
 
+
     @Override
     public void add(Section section) {
         SectionRepository.getInstance().add(section);

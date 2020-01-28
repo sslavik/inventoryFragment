@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,14 +33,13 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
 
     // DELEGADOS
     SectionAdapter.OnManageSection onManageSection;
+    SectionListContract.Presenter presenter;
 
     // FRAGMENT
-    SectionManageFragment sectionManagerFragment;
+    SectionManageFragment sectionManageFragment;
 
     // PRESENTER
-
-
-    SectionListContract.Presenter presenter;
+    SectionManagePresenter sectionManagePresenter;
 
     public static SectionFragment newInstance(Bundle bundle) {
         SectionFragment fragment = new SectionFragment();
@@ -94,6 +95,29 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
 
     // METODOS CREADOS
 
+    void showFragmentManageSection(Section section){
+
+        Bundle bundle = null;
+
+        // CHECKS FOR EDIT OR ADD SECTION
+        if (section != null) {
+            bundle = new Bundle();
+            bundle.putSerializable("section", section);
+        }
+
+        sectionManageFragment = (SectionManageFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentSectionManage);
+
+        if(sectionManageFragment == null){
+            sectionManageFragment = SectionManageFragment.newInstance(bundle);
+        }
+
+        FragmentTransaction fragmentTransaction =  getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentSection, sectionManageFragment);
+        fragmentTransaction.commit();
+
+        sectionManagePresenter = new SectionManagePresenter(sectionManageFragment);
+        sectionManageFragment.setPresenter(sectionManagePresenter);
+    }
 
     private void initRvSection() {
 
@@ -112,18 +136,13 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
         onManageSection = new SectionAdapter.OnManageSection() {
             @Override
             public void OnManageSection(Section section) {
-                SectionManageFragment sectionManageFragment = (SectionManageFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentSectionManage);
-
-                if(sectionManageFragment == null){
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("section", section);
-                    sectionManageFragment = SectionManageFragment.newInstance(bundle);
-                }
+                showFragmentManageSection(section);
             }
 
             @Override
             public void OnDeleteSection(Section section) {
-
+                // MENSAJE ANTES DE BORRADO
+                presenter.delete(section);
             }
         };
 
@@ -134,6 +153,7 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
             @Override
             public void onClick(View v) {
                 // ABRIMOS EL MANAGER PARA CREAR UNA SECCION
+                showFragmentManageSection(null);
             }
         });
     }

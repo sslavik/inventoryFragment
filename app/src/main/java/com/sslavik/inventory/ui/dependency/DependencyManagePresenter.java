@@ -21,6 +21,7 @@ public class DependencyManagePresenter implements DependencyManageContract.Prese
 
     @Override
     public void validateDependency(Dependency dependency) {
+        // SE VALIDA LA DEPENDENCIA AQUI
         view.onSuccessValidate(dependency);
     }
 

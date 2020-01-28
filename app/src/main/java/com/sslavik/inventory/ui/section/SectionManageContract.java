@@ -7,7 +7,6 @@ import com.sslavik.inventory.ui.base.BaseView;
 
 public interface SectionManageContract {
     interface View extends BaseView<Presenter>{
-
     }
 
     interface Presenter {
