@@ -1,7 +1,23 @@
 package com.sslavik.inventory.data.model;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = Dependency.class,
+                parentColumns = "shortName",
+                childColumns = "dependency",
+                onDelete = CASCADE
+        )
+})
 public class Section implements Serializable {
 
     /*
@@ -11,15 +27,21 @@ public class Section implements Serializable {
     * Descripcion
     * Imagen Seccion*/
     // CAMPOS
+    @NonNull
     private String name;
+    @PrimaryKey
+    @NonNull
     private String shortName;
-    private Dependency dependency;
+    @NonNull
+    private String dependency;
+    @NonNull
     private String description;
+    @NonNull
     private int imageSection;
 
     // CONSTRUCTOR
 
-    public Section(String name, String shortName, Dependency dependency, String description, int imageSection) {
+    public Section(String name, String shortName, String dependency, String description, int imageSection) {
         this.name = name;
         this.shortName = shortName;
         this.dependency = dependency;
@@ -46,11 +68,11 @@ public class Section implements Serializable {
         this.shortName = shortName;
     }
 
-    public Dependency getDependency() {
+    public String getDependency() {
         return dependency;
     }
 
-    public void setDependency(Dependency dependency) {
+    public void setDependency(String dependency) {
         this.dependency = dependency;
     }
 
@@ -68,5 +90,12 @@ public class Section implements Serializable {
 
     public void setImageSection(int imageSection) {
         this.imageSection = imageSection;
+    }
+
+    // OVERRIDE
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return this.getShortName().equals(((Section) obj).getShortName());
     }
 }

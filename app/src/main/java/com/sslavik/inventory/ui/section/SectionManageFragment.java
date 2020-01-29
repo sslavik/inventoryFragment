@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sslavik.inventory.R;
@@ -107,17 +108,18 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
                     validateSection();
                     presenter.add(section);
                 }
+                getActivity().onBackPressed();
             }
         });
     }
 
     private void validateSection() {
-        if(edShortName.getText().length() > 2 && edLongName.getText().length() != 0 && edDescription.getText().length() != 0){
+        if(edShortName.getText().length() > 1 && edLongName.getText().length() != 0 && edDescription.getText().length() != 0){
             section = new Section(null, null, null, null, 0);
             section.setShortName(edShortName.getText().toString());
             section.setName(edLongName.getText().toString());
             section.setDescription(edDescription.getText().toString());
-            section.setDependency((Dependency)spDependency.getSelectedItem());
+            section.setDependency(dependencyList.get(spDependency.getSelectedItemPosition()).getShortName());
             section.setImageSection(0);
         } else {
             showError(R.string.err_not_correct_section);
@@ -131,7 +133,10 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
             edShortName.setText(section.getShortName());
             edLongName.setText(section.getName());
             edDescription.setText(section.getDescription());
-            spDependency.setSelection(dependencyList.indexOf(section.getDependency()));
+            for (int i = 0; i < dependencyList.size(); i++) {
+                if(dependencyList.get(i).getShortName().equals(section.getDependency()))
+                    spDependency.setSelection(i);
+            }
         }
     }
 
@@ -160,6 +165,6 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
 
     @Override
     public void showError(int error) {
-
+        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT);
     }
 }

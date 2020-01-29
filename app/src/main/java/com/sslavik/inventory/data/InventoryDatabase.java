@@ -7,17 +7,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.sslavik.inventory.data.dao.DependencyDao;
+import com.sslavik.inventory.data.dao.SectionDao;
 import com.sslavik.inventory.data.model.Dependency;
+import com.sslavik.inventory.data.model.Section;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Dependency.class}, version = 4)
+@Database(entities = {Dependency.class, Section.class}, version = 5)
 public abstract class InventoryDatabase extends RoomDatabase {
 
     //DAOS
     // DECLARAMOS UN METODO QUE NOS DEVUELVE EL OBJETO DAO QUE ES ABSTRACTO /RARO PERO FUNCIONAL/
     public abstract DependencyDao dependencyDao();
+    public abstract SectionDao sectionDao();
 
     // CAMPOS DE BASE DE DATOS
     private static volatile InventoryDatabase INSTANCE;

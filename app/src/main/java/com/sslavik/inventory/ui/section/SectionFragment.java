@@ -113,7 +113,7 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
 
         FragmentTransaction fragmentTransaction =  getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentSection, sectionManageFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null).commit();
 
         sectionManagePresenter = new SectionManagePresenter(sectionManageFragment);
         sectionManageFragment.setPresenter(sectionManagePresenter);
@@ -143,6 +143,7 @@ public class SectionFragment extends Fragment implements SectionListContract.Vie
             public void OnDeleteSection(Section section) {
                 // MENSAJE ANTES DE BORRADO
                 presenter.delete(section);
+                sectionAdapter.delete(section);
             }
         };
 
