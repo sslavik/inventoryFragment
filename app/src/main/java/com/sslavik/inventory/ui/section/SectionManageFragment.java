@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,6 +135,7 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
             edLongName.setText(section.getName());
             edDescription.setText(section.getDescription());
             for (int i = 0; i < dependencyList.size(); i++) {
+                Log.d("FORLOOPMANAGE", i + " || " + dependencyList.get(i).getShortName() + " || " + section.getDependency());
                 if(dependencyList.get(i).getShortName().equals(section.getDependency()))
                     spDependency.setSelection(i);
             }

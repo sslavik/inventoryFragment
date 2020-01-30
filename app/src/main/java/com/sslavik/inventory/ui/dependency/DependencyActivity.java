@@ -1,6 +1,7 @@
 package com.sslavik.inventory.ui.dependency;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +33,15 @@ public class DependencyActivity extends BaseActivity implements DependencyFragme
         showListFragmets();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(getIntent().getBooleanExtra("notification", false)){
+            Log.d("PARCELABLE", getIntent().getExtras().getParcelable("Dependency").toString());
+            showAddFragrament(getIntent().getExtras());
+        }
+    }
 
     /**
      * Inicializa el contexto del fragmento

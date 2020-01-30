@@ -15,6 +15,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
     private Spinner spInventory;
     private EditText edDescription;
     private FloatingActionButton fabAdd;
+    static int notificationID = 0;
 
     public DependencyManageFragment() {
         // Required empty public constructor
@@ -180,21 +182,37 @@ public class DependencyManageFragment extends Fragment implements DependencyMana
         // Create an explicit intent for an Activity in your app
 
         // NOTIFICACION
-        Intent intent = new Intent();
+        Intent intent = new Intent(getContext(), DependencyActivity.class);
+        intent.putExtra("notification", true);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Dependency", dependency);
+        Log.d("PARCELABLE", dependency.toString());
+        intent.putExtras(bundle); // SI FALLA ESTO ES UN BUNDLE
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), InventoryApplication.CHANNEL_ID)
                 .setSmallIcon(R.drawable.inventory)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
+                .setContentTitle(getResources().getString(R.string.app_name))
+                .setContentText("Added : " + dependency.getName())
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // Set the intent that will fire when the user taps the notification
                 .setContentIntent(pendingIntent)
+                .setGroup("Dependency")
+                .setAutoCancel(true);
+        NotificationCompat.Builder builder2 = new NotificationCompat.Builder(getActivity(), InventoryApplication.CHANNEL_ID)
+                .setSmallIcon(R.drawable.inventory)
+                .setContentTitle(getResources().getString(R.string.app_name))
+                .setContentText("Added : " + dependency.getName())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setGroup("Dependency")
+                .setGroupSummary(true) // TENEMOS QUE HACER UNA NOTIFICACION PADRE CON UN IDE UNICO QUE CONTENGA A LAS NOTIFICACIONES HIJAS
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
-        notificationManagerCompat.notify(1,builder.build());
+        notificationManagerCompat.notify(-1,builder2.build());
+        notificationManagerCompat.notify(notificationID++,builder.build());
 
         getActivity().onBackPressed();
     }
